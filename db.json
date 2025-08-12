@@ -1,0 +1,62 @@
+{
+    "users": [
+        {
+            "id": "56fe",
+            "name": "aiman",
+            "email": "aimanrasack@gmail.com",
+            "password": "123",
+            "confirmPass": "123"
+        },
+        {
+            "id": "52e5",
+            "name": "aizam",
+            "email": "aizam@gmail.com",
+            "password": "aizam@123",
+            "confirmPass": "aizam@123"
+        },
+        {
+            "id": "8c70",
+            "name": "anand",
+            "email": "anand@gmail.com",
+            "password": "1",
+            "confirmPass": "1"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "brand": "Ray-Ban",
+            "image": "/src/assets/images/front-view-modern-sunglasses-modern-grey-desk-isolated-vision-spectacles-elegance.jpg",
+            "model": "Aviator Classic",
+            "frame_material": "Metal",
+            "lens_type": "Polarized",
+            "price": 149.99
+        },
+        {
+            "id": 2,
+            "brand": "Oakley",
+            "image": "/src/assets/images/sunglasses (1).jpg",
+            "model": "Holbrook",
+            "frame_material": "O-Matter",
+            "lens_type": "Prizm",
+            "price": 179.99
+        },
+        {
+            "id": 3,
+            "brand": "Ray-Ban",
+            "model": "Aviator Classic",
+            "image": "/src/assets/images/eyeglasses-wear (1).jpg",
+            "frame_material": "Metal",
+            "lens_type": "Polarized",
+            "price": 149.99
+        },
+        {
+            "id": 4,
+            "brand": "Oakley",
+            "model": "Holbrook",
+            "frame_material": "O-Matter",
+            "lens_type": "Prizm",
+            "price": 179.99
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+.card {
+    height: 250px;
+    width: 200px;
+    border-radius: 14px;
+
+    background-color: teal;
+}
+
+/* .main-card {
+    display: flex;
+} */
