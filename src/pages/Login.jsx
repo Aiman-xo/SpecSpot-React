@@ -71,7 +71,7 @@ function Login() {
                     })
                 }
                 else {
-                    nav('/home')
+                    nav('/')
                 }
             }
             else {

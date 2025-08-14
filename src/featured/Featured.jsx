@@ -6,7 +6,8 @@ import axios from 'axios'
 
 function Featured() {
     let [data, setData] = useState([]);
-    let [liked, setLiked] = useState(false);
+
+    let [liked, setLiked] = useState({});
 
     useEffect(() => {
         async function products() {
@@ -23,8 +24,9 @@ function Featured() {
 
 
             {
-                data.map((val) => {
-                    return <div className='card '>
+                data.slice(0, 4).map((val) => {
+                    const isLiked = liked[val.id] || false;
+                    return <div className='card ' key={val.id}>
                         <div className='flex justify-center'>
                             <img src={val.image} alt="" className='w-40 mt-3' />
                         </div>
@@ -35,10 +37,15 @@ function Featured() {
                                 <p className='text-green-500 '>{val.price}</p>
                                 <button className='bg-yellow-500 px-3 py-1 rounded text-xs cursor-pointer hover:bg-yellow-400'>Add to cart</button>
                                 <button
-                                    onClick={() => setLiked(!liked)}
-                                    className="p-2 rounded-full hover:bg-gray-100 transition ms-13"
+                                    onClick={() => setLiked(pre => {
+                                        return {
+                                            ...pre,
+                                            [val.id]: !pre[val.id]
+                                        }
+                                    })}
+                                    className="p-2 rounded-full hover:bg-gray-100 transition ms-13 cursor-pointer"
                                 >
-                                    {liked ? (
+                                    {isLiked ? (
                                         <HeartSolid className="h-6 w-6 text-red-500" />
                                     ) : (
                                         <HeartOutline className="h-6 w-6 text-gray-500" />
@@ -51,35 +58,7 @@ function Featured() {
                     </div>
                 })
             }
-            {/* <div className='card'>
 
-            </div>
-
-            <div className='card'>
-
-            </div>
-
-            <div className='card'>
-
-            </div>
-
-
-
-            <div className='card'>
-
-            </div>
-
-            <div className='card'>
-
-            </div>
-
-            <div className='card'>
-
-            </div>
-
-            <div className='card'>
-
-            </div> */}
         </div>
     )
 }

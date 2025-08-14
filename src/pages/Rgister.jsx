@@ -73,7 +73,7 @@ function Rgister() {
             }
             else {
                 GetUser()
-                nav('/')
+                nav('/login')
             }
 
 
@@ -168,7 +168,7 @@ function Rgister() {
 
                     <div className='text-center mt-6'>
                         <p className='text-gray-600'>Already have an account?
-                            <span className='text-blue-600 hover:text-blue-700 cursor-pointer font-medium ml-1'><Link to={'/'}>Log in</Link></span>
+                            <span className='text-blue-600 hover:text-blue-700 cursor-pointer font-medium ml-1'><Link to={'/login'}>Log in</Link></span>
                         </p>
                     </div>
                 </div>
