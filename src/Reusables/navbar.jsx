@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { searchContext } from '../Context-API/context';
@@ -8,6 +8,16 @@ import { searchContext } from '../Context-API/context';
 function Navbar() {
     let [isMenuOpen, setIsMenuOpen] = useState(false);
     let { search, setSearch } = useContext(searchContext);
+    // let { addtocart } = useContext(searchContext);
+
+    // useEffect(() => {
+    //     const result = JSON.parse(localStorage.getItem("cartValue"));
+    // }, [])
+
+    // useEffect(() => {
+    //     localStorage.setItem("cartValue", JSON.stringify(addtocart));
+    // }, [addtocart])
+
 
     return (
 
@@ -89,7 +99,7 @@ function Navbar() {
                     </Link>
 
                     {/* Cart */}
-                    <Link href="#" className="text-gray-700 hover:text-blue-600 relative">
+                    <Link to={'/cart'} className="text-gray-700 hover:text-blue-600 relative">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -105,7 +115,7 @@ function Navbar() {
                             />
                         </svg>
                         <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                            0
+                            { }
                         </span>
                     </Link>
 

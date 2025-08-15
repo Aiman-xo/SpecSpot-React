@@ -1,228 +1,256 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "e8ba",
+      "name": "athul",
+      "email": "athul@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "cart": [
         {
-            "id": "56fe",
-            "name": "aiman",
-            "email": "aimanrasack@gmail.com",
-            "password": "123",
-            "confirmPass": "123"
-        },
-        {
-            "id": "52e5",
-            "name": "aizam",
-            "email": "aizam@gmail.com",
-            "password": "aizam@123",
-            "confirmPass": "aizam@123"
-        },
-        {
-            "id": "8c70",
-            "name": "anand",
-            "email": "anand@gmail.com",
-            "password": "1",
-            "confirmPass": "1"
-        },
-        {
-            "id": "ba34",
-            "name": "aiman2",
-            "email": "aiman2@gamil.com",
-            "password": "1010",
-            "confirmPass": "1010"
+          "id": "3",
+          "brand": "Ray-Ban",
+          "model": "Aviator Classic",
+          "type": "normal",
+          "image": "/src/assets/images/eyeglasses-wear (1).jpg",
+          "frame_material": "Metal",
+          "lens_type": "Polarized",
+          "quantity": 1,
+          "price": 149.99
         }
-    ],
-    "products": [
-        {
-            "id": 1,
-            "brand": "Ray-Ban",
-            "image": "/src/assets/images/front-view-modern-sunglasses-modern-grey-desk-isolated-vision-spectacles-elegance.jpg",
-            "model": "Aviator Classic",
-            "frame_material": "Metal",
-            "lens_type": "Polarized",
-            "price": 149.99
-        },
-        {
-            "id": 2,
-            "brand": "Oakley",
-            "image": "/src/assets/images/sunglasses (1).jpg",
-            "model": "Holbrook",
-            "type": "sunglass",
-            "frame_material": "O-Matter",
-            "lens_type": "Prizm",
-            "price": 179.99
-        },
-        {
-            "id": 3,
-            "brand": "Ray-Ban",
-            "model": "Aviator Classic",
-            "image": "/src/assets/images/eyeglasses-wear (1).jpg",
-            "frame_material": "Metal",
-            "lens_type": "Polarized",
-            "price": 149.99
-        },
-        {
-            "id": 4,
-            "brand": "Oakley",
-            "model": "Holbrook",
-            "image": "/src/assets/images/sunglasses (2).jpg",
-            "frame_material": "O-Matter",
-            "lens_type": "Prizm",
-            "price": 179.99
-        },
-        {
-            "id": 5,
-            "brand": "Gucci",
-            "image": "src/assets/images/jeremy-budiman-hpG0qRo_e84-unsplash.jpg",
-            "model": "GG0061S",
-            "frame_material": "Acetate",
-            "lens_type": "Gradient",
-            "price": 295.00
-        },
-        {
-            "id": 6,
-            "brand": "Persol",
-            "image": "/src/assets/images/oli-woodman-s7gRHGEmX78-unsplash.jpg",
-            "model": "PO0649",
-            "frame_material": "Acetate",
-            "lens_type": "Polarized",
-            "price": 215.00
-        },
-        {
-            "id": 7,
-            "brand": "Prada",
-            "image": "/src/assets/images/sunglasses.jpg",
-            "model": "PR 09VS",
-            "type": "sunglass",
-            "frame_material": "Metal",
-            "lens_type": "Solid",
-            "price": 280.75
-        },
-        {
-            "id": 8,
-            "brand": "Maui Jim",
-            "image": "https://images.edel-optics.com/eoProductsGlassesSunglasses/640/nobg/Ray-Ban-RB2140-901-58.jpg",
-            "model": "Red Sands",
-            "type": "sunglass",
-            "frame_material": "Nylon",
-            "lens_type": "PolarizedPlus2",
-            "price": 199.99
-        },
-        {
-            "id": 9,
-            "brand": "Versace",
-            "image": "https://media.misterspex.com/t_pl-tile/dpr_1/f_auto/v1/productimages/5400/5400_a",
-            "model": "VE2140",
-            "type": "sunglass",
-            "frame_material": "Metal",
-            "lens_type": "Mirrored",
-            "price": 310.00
-        },
-        {
-            "id": 10,
-            "brand": "Tom Ford",
-            "image": "https://ainak.pk/wp-content/uploads/2024/08/rb-4202-3.webp",
-            "model": "FT0237",
-            "type": "sunglass",
-            "frame_material": "Acetate",
-            "lens_type": "Gradient",
-            "price": 365.50
-        },
-        {
-            "id": 11,
-            "brand": "Burberry",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTWHaVLfSvG49bDs64QEEnz9mK7Cp5t_rOBNI3gGKG9eVI7nXX1hmhcdVF0In423A7ORw&usqp=CAU",
-            "model": "BE3105",
-            "type": "sunglass",
-            "frame_material": "Metal",
-            "lens_type": "Solid",
-            "price": 210.25
-        },
-        {
-            "id": 12,
-            "brand": "Dior",
-            "image": "https://product.visiofactory.com/img/p/1/0/1/1/9/0/101190-thickbox.jpg",
-            "model": "Stellaire1",
-            "type": "sunglass",
-            "frame_material": "Metal",
-            "lens_type": "Gradient",
-            "price": 420.00
-        },
-        {
-            "id": 13,
-            "brand": "Fendi",
-            "image": "https://i2.optical-center.fr/workspace_prods/fromFtb/Sunglasses-RAY-BAN-RB-2132-622-New-Wayfarer-52-18-3490_w600_5.jpg?1636614293",
-            "model": "FF0375/G/S",
-            "type": "sunglass",
-            "frame_material": "Acetate",
-            "lens_type": "Solid",
-            "price": 275.99
-        },
-        {
-            "id": 14,
-            "brand": "Carrera",
-            "image": "https://images2.ray-ban.com//cdn-record-files-pi/785cd2a8-5933-4d14-b145-a35800039b33/08c4f48a-4c05-473f-bebc-b01300c1c672/0RB2140__901__P21__shad__al2.png?impolicy=RB_Product_clone&width=700&bgc=%23f2f2f2",
-            "model": "Champion",
-            "type": "sunglass",
-            "frame_material": "Plastic",
-            "lens_type": "Polarized",
-            "price": 145.00
-        },
-        {
-            "id": 15,
-            "brand": "Michael Kors",
-            "image": "https://www.payneglasses.com/media/catalog/product/cache/31662dae7227b2c24fea503b72208429/m/a/main_1705453542576.jpg",
-            "model": "Chelsea",
-            "type": "transparent",
-            "frame_material": "Metal",
-            "lens_type": "Mirrored",
-            "price": 165.00
-        },
-        {
-            "id": 16,
-            "brand": "Chanel",
-            "image": "https://d3995ea24pmi7m.cloudfront.net/media/catalog/product/d/k/dk1078ffp1lwhv_1_lar.jpg",
-            "model": "CH5418",
-            "type": "transparent",
-            "frame_material": "Acetate",
-            "lens_type": "Gradient",
-            "price": 399.99
-        },
-        {
-            "id": 17,
-            "brand": "Costa Del Mar",
-            "image": "https://www.crazyspects.com/mid-size-image/4752.webp",
-            "model": "Fantail",
-            "type": "transparent",
-            "frame_material": "Nylon",
-            "lens_type": "Polarized",
-            "price": 189.00
-        },
-        {
-            "id": 18,
-            "brand": "Armani Exchange",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ4SXxg4-ZgUz8Nba2B60dDvHFAyGUcaq8q2-JJZgOWAjMl-mb_ol9HSNWMVM7G2rWtGM&usqp=CAU",
-            "model": "AX2012S",
-            "type": "transparent",
-            "frame_material": "Metal",
-            "lens_type": "Mirrored",
-            "price": 140.50
-        },
-        {
-            "id": 19,
-            "brand": "Police",
-            "image": "https://m.media-amazon.com/images/I/51jlo9CerlL._SY350_QL65_.jpg",
-            "model": "SPL872",
-            "frame_material": "Acetate",
-            "lens_type": "Solid",
-            "price": 175.25
-        },
-        {
-            "id": 20,
-            "brand": "Hugo Boss",
-            "image": "https://us.jins.com/cdn/shop/products/MUF-15A-503_91_01.jpg?v=1664211745",
-            "model": "BOSS 1045/S",
-            "type": "transparent",
-            "frame_material": "Metal",
-            "lens_type": "Gradient",
-            "price": 220.00
-        }
-    ]
+      ],
+      "wishlist": []
+    },
+    {
+      "id": "e90e",
+      "name": "akhil",
+      "email": "akhil@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "cart": [],
+      "wishlist": []
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "brand": "Ray-Ban",
+      "image": "/src/assets/images/front-view-modern-sunglasses-modern-grey-desk-isolated-vision-spectacles-elegance.jpg",
+      "model": "Aviator Classic",
+      "type": "normal",
+      "frame_material": "Metal",
+      "lens_type": "Polarized",
+      "quantity": 1,
+      "price": 149.99
+    },
+    {
+      "id": "2",
+      "brand": "Oakley",
+      "image": "/src/assets/images/sunglasses (1).jpg",
+      "model": "Holbrook",
+      "type": "sunglass",
+      "frame_material": "O-Matter",
+      "lens_type": "Prizm",
+      "quantity": 1,
+      "price": 179.99
+    },
+    {
+      "id": "3",
+      "brand": "Ray-Ban",
+      "model": "Aviator Classic",
+      "type": "normal",
+      "image": "/src/assets/images/eyeglasses-wear (1).jpg",
+      "frame_material": "Metal",
+      "lens_type": "Polarized",
+      "quantity": 1,
+      "price": 149.99
+    },
+    {
+      "id": "4",
+      "brand": "Oakley",
+      "model": "Holbrook",
+      "type": "normal",
+      "image": "/src/assets/images/sunglasses (2).jpg",
+      "frame_material": "O-Matter",
+      "lens_type": "Prizm",
+      "quantity": 1,
+      "price": 179.99
+    },
+    {
+      "id": "5",
+      "brand": "Gucci",
+      "image": "src/assets/images/jeremy-budiman-hpG0qRo_e84-unsplash.jpg",
+      "model": "GG0061S",
+      "type": "normal",
+      "frame_material": "Acetate",
+      "lens_type": "Gradient",
+      "quantity": 1,
+      "price": 295
+    },
+    {
+      "id": "6",
+      "brand": "Persol",
+      "image": "/src/assets/images/oli-woodman-s7gRHGEmX78-unsplash.jpg",
+      "model": "PO0649",
+      "type": "normal",
+      "frame_material": "Acetate",
+      "lens_type": "Polarized",
+      "quantity": 1,
+      "price": 215
+    },
+    {
+      "id": "7",
+      "brand": "Prada",
+      "image": "/src/assets/images/sunglasses.jpg",
+      "model": "PR 09VS",
+      "type": "sunglass",
+      "frame_material": "Metal",
+      "lens_type": "Solid",
+      "quantity": 1,
+      "price": 280.75
+    },
+    {
+      "id": "8",
+      "brand": "Maui Jim",
+      "image": "https://images.edel-optics.com/eoProductsGlassesSunglasses/640/nobg/Ray-Ban-RB2140-901-58.jpg",
+      "model": "Red Sands",
+      "type": "sunglass",
+      "frame_material": "Nylon",
+      "lens_type": "PolarizedPlus2",
+      "quantity": 1,
+      "price": 199.99
+    },
+    {
+      "id": "9",
+      "brand": "Versace",
+      "image": "https://media.misterspex.com/t_pl-tile/dpr_1/f_auto/v1/productimages/5400/5400_a",
+      "model": "VE2140",
+      "type": "sunglass",
+      "frame_material": "Metal",
+      "lens_type": "Mirrored",
+      "quantity": 1,
+      "price": 310
+    },
+    {
+      "id": "10",
+      "brand": "Tom Ford",
+      "image": "https://ainak.pk/wp-content/uploads/2024/08/rb-4202-3.webp",
+      "model": "FT0237",
+      "type": "sunglass",
+      "frame_material": "Acetate",
+      "lens_type": "Gradient",
+      "quantity": 1,
+      "price": 365.5
+    },
+    {
+      "id": "11",
+      "brand": "Burberry",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTWHaVLfSvG49bDs64QEEnz9mK7Cp5t_rOBNI3gGKG9eVI7nXX1hmhcdVF0In423A7ORw&usqp=CAU",
+      "model": "BE3105",
+      "type": "sunglass",
+      "frame_material": "Metal",
+      "lens_type": "Solid",
+      "quantity": 1,
+      "price": 210.25
+    },
+    {
+      "id": "12",
+      "brand": "Dior",
+      "image": "https://product.visiofactory.com/img/p/1/0/1/1/9/0/101190-thickbox.jpg",
+      "model": "Stellaire1",
+      "type": "sunglass",
+      "frame_material": "Metal",
+      "lens_type": "Gradient",
+      "quantity": 1,
+      "price": 420
+    },
+    {
+      "id": "13",
+      "brand": "Fendi",
+      "image": "https://i2.optical-center.fr/workspace_prods/fromFtb/Sunglasses-RAY-BAN-RB-2132-622-New-Wayfarer-52-18-3490_w600_5.jpg?1636614293",
+      "model": "FF0375/G/S",
+      "type": "sunglass",
+      "frame_material": "Acetate",
+      "lens_type": "Solid",
+      "quantity": 1,
+      "price": 275.99
+    },
+    {
+      "id": "14",
+      "brand": "Carrera",
+      "image": "https://images2.ray-ban.com//cdn-record-files-pi/785cd2a8-5933-4d14-b145-a35800039b33/08c4f48a-4c05-473f-bebc-b01300c1c672/0RB2140__901__P21__shad__al2.png?impolicy=RB_Product_clone&width=700&bgc=%23f2f2f2",
+      "model": "Champion",
+      "type": "sunglass",
+      "frame_material": "Plastic",
+      "lens_type": "Polarized",
+      "quantity": 1,
+      "price": 145
+    },
+    {
+      "id": "15",
+      "brand": "Michael Kors",
+      "image": "https://www.payneglasses.com/media/catalog/product/cache/31662dae7227b2c24fea503b72208429/m/a/main_1705453542576.jpg",
+      "model": "Chelsea",
+      "type": "transparent",
+      "frame_material": "Metal",
+      "lens_type": "Mirrored",
+      "quantity": 1,
+      "price": 165
+    },
+    {
+      "id": "16",
+      "brand": "Chanel",
+      "image": "https://d3995ea24pmi7m.cloudfront.net/media/catalog/product/d/k/dk1078ffp1lwhv_1_lar.jpg",
+      "model": "CH5418",
+      "type": "transparent",
+      "frame_material": "Acetate",
+      "lens_type": "Gradient",
+      "quantity": 1,
+      "price": 399.99
+    },
+    {
+      "id": "17",
+      "brand": "Costa Del Mar",
+      "image": "https://www.crazyspects.com/mid-size-image/4752.webp",
+      "model": "Fantail",
+      "type": "transparent",
+      "frame_material": "Nylon",
+      "lens_type": "Polarized",
+      "quantity": 1,
+      "price": 189
+    },
+    {
+      "id": "18",
+      "brand": "Armani Exchange",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ4SXxg4-ZgUz8Nba2B60dDvHFAyGUcaq8q2-JJZgOWAjMl-mb_ol9HSNWMVM7G2rWtGM&usqp=CAU",
+      "model": "AX2012S",
+      "type": "transparent",
+      "frame_material": "Metal",
+      "lens_type": "Mirrored",
+      "quantity": 1,
+      "price": 140.5
+    },
+    {
+      "id": "19",
+      "brand": "Police",
+      "image": "https://m.media-amazon.com/images/I/51jlo9CerlL._SY350_QL65_.jpg",
+      "model": "SPL872",
+      "type": "normal",
+      "frame_material": "Acetate",
+      "lens_type": "Solid",
+      "quantity": 1,
+      "price": 175.25
+    },
+    {
+      "id": "20",
+      "brand": "Hugo Boss",
+      "image": "https://us.jins.com/cdn/shop/products/MUF-15A-503_91_01.jpg?v=1664211745",
+      "model": "BOSS 1045/S",
+      "type": "transparent",
+      "frame_material": "Metal",
+      "lens_type": "Gradient",
+      "quantity": 1,
+      "price": 220
+    }
+  ]
 }

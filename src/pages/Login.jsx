@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 // import { RegisterContext } from './Rgister'
-// import { useContext } from 'react'
+import { useContext } from 'react'
+import { searchContext } from '../Context-API/context';
 
 function reducFun(prev, action) {
     switch (action.type) {
@@ -42,6 +43,7 @@ function reducFun(prev, action) {
 function Login() {
     let nav = useNavigate();
     let [cred, setCred] = useState([]);
+    let { user, setUser } = useContext(searchContext);
     // let { email1, password1 } = useContext(RegisterContext);
     useEffect(() => {
         async function GetCred() {
@@ -71,6 +73,14 @@ function Login() {
                     })
                 }
                 else {
+
+                    const user1 = cred.find((user) => user.email === state.email && user.password === state.pass);
+                    // console.log(user1.id);
+                    if (user1) {
+                        localStorage.setItem("userId", user1.id);
+                        setUser(user1.id);
+                    }
+
                     nav('/')
                 }
             }
