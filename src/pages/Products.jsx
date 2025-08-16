@@ -4,7 +4,7 @@ import axios from 'axios'
 import { HeartIcon as HeartOutline } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import { useState } from 'react'
-import { data, Link } from 'react-router-dom';
+import { data, Link, useNavigate } from 'react-router-dom';
 import '../mystyle.css'
 // import { data } from 'react-router-dom';
 import { searchContext } from '../Context-API/context';
@@ -15,9 +15,10 @@ function Products() {
     let [details, setDetails] = useState(products);
     let [liked, setLiked] = useState({});
     let [notfound, setNotfound] = useState('');
-    // let [filter, setFilter] = useState('')
+    let [wishlist1, setWishlist] = useState([]);
     const { search } = useContext(searchContext);
     const { user } = useContext(searchContext);
+    let navigate = useNavigate();
     // const { addtocart, setAddtocart } = useContext(searchContext);
 
 
@@ -49,6 +50,18 @@ function Products() {
             const data = await resp.data;
             setProducts(data);
             setDetails(data)
+
+            const userId = localStorage.getItem("userId")
+            if (!userId) {
+                // alert('please log in first!')
+                // navigate('/login')
+                return
+            }
+            const wish = await axios.get(`http://localhost:3000/users/${userId}`);
+            const wishData = wish.data;
+            setWishlist(wishData.wishlist);
+
+
         }
         ProductList();
     }, [])
@@ -96,6 +109,11 @@ function Products() {
     async function AddtoCart(val, ID) {
 
         let userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert('please log in first!')
+            navigate('/login')
+            return;
+        }
         const UserData = await axios.get(`http://localhost:3000/users/${userId}`);
         const data = await UserData.data;
 
@@ -119,6 +137,69 @@ function Products() {
 
 
 
+
+
+    }
+
+
+    async function wishlist(val, ID) {
+        // const isLiked = liked[val.id] || false;
+        // setLiked(pre => {
+        //     return {
+        //         ...pre,
+        //         [val.id]: !pre[val.id]
+        //     }
+        // })
+
+
+        const isLiked = wishlist1.some(item => item.id === ID);
+
+
+        if (!isLiked) {
+
+            const userId = localStorage.getItem("userId")
+            if (!userId) {
+                alert('please log in first!')
+                navigate('/login')
+                return
+            }
+
+            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const data = await resp.data;
+
+            if (data.wishlist.find((item) => item.id === ID)) {
+                alert(`${val.brand} already in wishlist`)
+            }
+            else {
+                const updatedWishlist = [...data.wishlist, val]
+                await axios.patch(`http://localhost:3000/users/${userId}`, {
+                    wishlist: updatedWishlist
+                });
+                alert(`${val.brand} is one of your liking`)
+                setWishlist(updatedWishlist);
+
+            }
+
+
+
+        }
+        else {
+            const userID = localStorage.getItem("userId");
+
+            const resp = await axios.get(`http://localhost:3000/users/${userID}`);
+            const data = await resp.data;
+
+            const newFiltered = data.wishlist.filter((val) => {
+                return val.id !== ID
+            })
+
+            await axios.patch(`http://localhost:3000/users/${userID}`, {
+                wishlist: newFiltered
+            })
+            setWishlist(newFiltered)
+
+            alert(`${val.brand} removed from wishlist`)
+        }
 
 
     }
@@ -160,12 +241,13 @@ function Products() {
 
                 {
                     details.map((val) => {
-                        const isLiked = liked[val.id] || false;
+                        // const isLiked = liked[val.id] || false;
+                        const isLiked = wishlist1.some(item => item.id === val.id);
 
                         return <div key={val.id}>
                             <div className='card  ' >
                                 <div className='flex justify-center'>
-                                    <img src={val.image} alt="" className='w-40 mt-3' />
+                                    <Link to={`/induvidual/${val.id}`}><img src={val.image} alt="" className='w-40 mt-3' /></Link>
                                 </div>
                                 <div className='flex justify-start ms-5'>
                                     <div >
@@ -175,12 +257,7 @@ function Products() {
                                         <button className='bg-yellow-500 px-3 py-1 rounded text-xs cursor-pointer hover:bg-yellow-400'
                                             onClick={() => AddtoCart(val, val.id)}>Add to cart</button>
                                         <button
-                                            onClick={() => setLiked(pre => {
-                                                return {
-                                                    ...pre,
-                                                    [val.id]: !pre[val.id]
-                                                }
-                                            })}
+                                            onClick={() => wishlist(val, val.id)}
                                             className="p-2 rounded-full hover:bg-gray-100 transition ms-13 cursor-pointer"
                                         >
                                             {isLiked ? (

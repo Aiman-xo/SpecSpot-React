@@ -6,19 +6,7 @@
       "email": "athul@gmail.com",
       "password": "123",
       "confirmPass": "123",
-      "cart": [
-        {
-          "id": "3",
-          "brand": "Ray-Ban",
-          "model": "Aviator Classic",
-          "type": "normal",
-          "image": "/src/assets/images/eyeglasses-wear (1).jpg",
-          "frame_material": "Metal",
-          "lens_type": "Polarized",
-          "quantity": 1,
-          "price": 149.99
-        }
-      ],
+      "cart": [],
       "wishlist": []
     },
     {
@@ -27,6 +15,15 @@
       "email": "akhil@gmail.com",
       "password": "123",
       "confirmPass": "123",
+      "cart": [],
+      "wishlist": []
+    },
+    {
+      "id": "78d3",
+      "name": "abeen",
+      "email": "abeen@gmail.com",
+      "password": "234",
+      "confirmPass": "234",
       "cart": [],
       "wishlist": []
     }

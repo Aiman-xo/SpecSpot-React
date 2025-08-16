@@ -1,48 +1,42 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Navbar from '../Reusables/navbar'
-// import { useContext } from 'react'
-// import { searchContext } from '../Context-API/context'
-import '../mystyle.css'
-import axios from 'axios'
-import { data, useNavigate } from 'react-router-dom';
+import Navbar from '../Reusables/navbar';
+import { useNavigate } from 'react-router-dom';
 
-function Cart() {
-    // let { addtocart, setAddtocart } = useContext(searchContext);
-    let [userDetail, setuserDetails] = useState({ cart: [] });
-    let nav = useNavigate()
+function Wishlist() {
 
+    let nav = useNavigate();
 
-    async function RemoveCartItem(removeInd, removedProduct) {
-        let userId = localStorage.getItem("userId")
-        alert(`removed item ${removedProduct}`)
-        const filtered = userDetail.cart.filter((val) => {
+    const userId = localStorage.getItem("userId")
 
-            return val.id !== removeInd
-        })
-        setuserDetails({ cart: filtered })
-
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
-            cart: filtered
-        });
-
-
-
-    }
+    let [wishlistItem, setWishlistItem] = useState([]);
 
     useEffect(() => {
-        let userId = localStorage.getItem("userId")
         if (!userId) {
             alert('please log in first!')
             nav('/login')
             return
         }
-        async function getCart() {
+        async function wish() {
             const resp = await axios.get(`http://localhost:3000/users/${userId}`);
-            const userDetails = await resp.data;
-            setuserDetails(userDetails)
+            const data = await resp.data;
+            setWishlistItem(data.wishlist);
         }
-        getCart()
+        wish()
     }, [])
+    async function RemoveWishlist(WishId, Brand) {
+        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const data = await resp.data;
+        // setWishlistItem(data.wishlist)
+
+        const filtered = data.wishlist.filter((val) => {
+            return val.id !== WishId;
+        })
+        await axios.patch(`http://localhost:3000/users/${userId}`, {
+            wishlist: filtered
+        })
+        setWishlistItem(filtered)
+    }
     return (
         <div>
             <Navbar />
@@ -54,12 +48,12 @@ function Cart() {
 
             {
 
-                userDetail.cart.length === 0 ?
+                wishlistItem.length === 0 ?
                     <div className='flex justify-center items-center mt-4 font-bold text-2xl font-[arial] text-red-500 h-100'>
                         <p className=''>Cart Empty!</p>
                     </div>
                     :
-                    userDetail.cart.map((val) => {
+                    wishlistItem.map((val) => {
 
 
                         return <div className="flex justify-center" key={val.id}>
@@ -98,8 +92,8 @@ function Cart() {
                                                 Buy Now
                                             </button>
                                             <button className="bg-red-500 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-red-600 cursor-pointer"
-                                                onClick={() => RemoveCartItem(val.id, val.brand)}>
-                                                Remove from Cart
+                                                onClick={() => RemoveWishlist(val.id, val.brand)}>
+                                                Remove from Wishlist
                                             </button>
                                         </div>
 
@@ -122,4 +116,4 @@ function Cart() {
     )
 }
 
-export default Cart
+export default Wishlist

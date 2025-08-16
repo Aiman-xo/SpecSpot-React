@@ -1,23 +1,37 @@
 import React, { useEffect } from 'react'
 import { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { searchContext } from '../Context-API/context';
+import axios from 'axios';
 
 
 
 function Navbar() {
     let [isMenuOpen, setIsMenuOpen] = useState(false);
     let { search, setSearch } = useContext(searchContext);
-    // let { addtocart } = useContext(searchContext);
+    let [cartlength, setCartlength] = useState([]);
+    let [wishlength, setWishLength] = useState([]);
+    let nav = useNavigate();
 
-    // useEffect(() => {
-    //     const result = JSON.parse(localStorage.getItem("cartValue"));
-    // }, [])
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            return
+        }
+        async function getCartLength() {
+            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const data = resp.data;
+            setCartlength(data.cart);
+            setWishLength(data.wishlist);
+        }
+        getCartLength()
+    })
 
-    // useEffect(() => {
-    //     localStorage.setItem("cartValue", JSON.stringify(addtocart));
-    // }, [addtocart])
-
+    function LogOut() {
+        localStorage.removeItem("userId");
+        alert('loggin out....')
+        nav('/login')
+    }
 
     return (
 
@@ -78,7 +92,7 @@ function Navbar() {
                 {/* Navigation Icons */}
                 <div className="flex items-center space-x-6">
                     {/* Wishlist */}
-                    <Link href="#" className="text-gray-700 hover:text-blue-600 relative">
+                    <Link to={'/wishlist'} className="text-gray-700 hover:text-blue-600 relative">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -94,7 +108,7 @@ function Navbar() {
                             />
                         </svg>
                         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                            0
+                            {wishlength.length}
                         </span>
                     </Link>
 
@@ -115,12 +129,12 @@ function Navbar() {
                             />
                         </svg>
                         <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                            { }
+                            {cartlength.length}
                         </span>
                     </Link>
 
                     {/* Logout (Desktop Only) */}
-                    <Link href="#" className="text-gray-700 hover:text-blue-600 hidden sm:inline-block">
+                    <button className="text-gray-700 hover:text-blue-600 hidden sm:inline-block" onClick={LogOut}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -135,7 +149,7 @@ function Navbar() {
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                             />
                         </svg>
-                    </Link>
+                    </button>
 
                     {/* Hamburger Menu (Mobile Only) */}
                     <button
@@ -170,9 +184,9 @@ function Navbar() {
                         Product
                     </Link>
                     {/* Logout in Mobile Menu */}
-                    <Link href="#" className="block py-2 text-red-700 hover:text-blue-600">
+                    <button className="block py-2 text-red-700 hover:text-blue-600">
                         Logout
-                    </Link>
+                    </button>
                 </div>
             )}
         </nav>
