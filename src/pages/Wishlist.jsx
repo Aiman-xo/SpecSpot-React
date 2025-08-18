@@ -5,18 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 function Wishlist() {
 
-    let nav = useNavigate();
+
 
     const userId = localStorage.getItem("userId")
 
     let [wishlistItem, setWishlistItem] = useState([]);
 
     useEffect(() => {
-        if (!userId) {
-            alert('please log in first!')
-            nav('/login')
-            return
-        }
         async function wish() {
             const resp = await axios.get(`http://localhost:3000/users/${userId}`);
             const data = await resp.data;
@@ -49,8 +44,8 @@ function Wishlist() {
             {
 
                 wishlistItem.length === 0 ?
-                    <div className='flex justify-center items-center mt-4 font-bold text-2xl font-[arial] text-red-500 h-100'>
-                        <p className=''>Cart Empty!</p>
+                    <div className='flex justify-center items-center mt-4 font-bold text-xl font-[arial] text-red-500 h-100'>
+                        <p className=''>Nothing in wishlist!</p>
                     </div>
                     :
                     wishlistItem.map((val) => {

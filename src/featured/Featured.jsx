@@ -3,14 +3,15 @@ import { HeartIcon as HeartOutline } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import '../mystyle.css'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function Featured() {
     let [data, setData] = useState([]);
     let navigate = useNavigate();
     let [wishlist1, setWishlist] = useState([]);
+    // let {id}=useParams()
 
-    let [liked, setLiked] = useState({});
+    // let [liked, setLiked] = useState({});
 
     useEffect(() => {
         async function products() {
@@ -90,7 +91,7 @@ function Featured() {
             if (userId) {
 
                 await axios.patch(`http://localhost:3000/users/${userId}`, {
-                    cart: [...data.cart, val]
+                    cart: [...data.cart, val],
 
                 })
 
@@ -139,7 +140,7 @@ function Featured() {
                 await axios.patch(`http://localhost:3000/users/${userId}`, {
                     wishlist: updatedWishlist
                 });
-                alert(`${val.brand} is one of your liking`)
+                // alert(`${val.brand} is one of your liking`)
                 setWishlist(updatedWishlist);
 
             }
@@ -162,7 +163,7 @@ function Featured() {
             })
             setWishlist(newFiltered)
 
-            alert(`${val.brand} removed from wishlist`)
+            // alert(`${val.brand} removed from wishlist`)
         }
 
 
@@ -178,7 +179,7 @@ function Featured() {
                     const isLiked = wishlist1.some(item => item.id === val.id);
                     return <div className='card ' key={val.id}>
                         <div className='flex justify-center'>
-                            <img src={val.image} alt="" className='w-40 mt-3' />
+                            <Link to={`/induvidual/${val.id}`}><img src={val.image} alt="" className='w-40 mt-3' /></Link>
                         </div>
                         <div className='flex justify-start ms-5'>
                             <div >

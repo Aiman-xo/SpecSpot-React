@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../Reusables/navbar';
 
 function Induvidual() {
     let { id } = useParams();
     let [induvidual, setInduvidual] = useState([]);
+    let nav = useNavigate();
 
 
     useEffect(() => {
@@ -17,6 +18,23 @@ function Induvidual() {
         }
         GetInduvidualProduct();
     }, [id])
+
+    async function AddtoCart(Product) {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert('please login first!');
+            nav('/login')
+        }
+        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const data = await resp.data;
+
+
+
+        await axios.patch(`http://localhost:3000/users/${userId}`, {
+            cart: [...data.cart, Product]
+        })
+        alert(`${Product.brand} is added to your cart`)
+    }
 
 
 
@@ -56,14 +74,14 @@ function Induvidual() {
                             </p>
 
                             {/* Buttons */}
-                            {/* <div className="flex gap-4"> */}
-                            {/* <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md">
+                            <div className="flex gap-4">
+                                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual)}>
                                     Add to Cart
                                 </button>
-                                <button className="border border-gray-400 hover:border-red-500 hover:text-red-500 px-6 py-2 rounded-lg shadow-md">
+                                {/* <button className="border border-gray-400 hover:border-red-500 hover:text-red-500 px-6 py-2 rounded-lg shadow-md">
                                     ❤️ Wishlist
                                 </button> */}
-                            {/* </div> */}
+                            </div>
                         </div>
 
                         {/* Extra Info */}

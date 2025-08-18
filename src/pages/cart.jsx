@@ -10,6 +10,8 @@ function Cart() {
     // let { addtocart, setAddtocart } = useContext(searchContext);
     let [userDetail, setuserDetails] = useState({ cart: [] });
     let nav = useNavigate()
+    let [count, setCount] = useState(0);
+
 
 
     async function RemoveCartItem(removeInd, removedProduct) {
@@ -31,11 +33,6 @@ function Cart() {
 
     useEffect(() => {
         let userId = localStorage.getItem("userId")
-        if (!userId) {
-            alert('please log in first!')
-            nav('/login')
-            return
-        }
         async function getCart() {
             const resp = await axios.get(`http://localhost:3000/users/${userId}`);
             const userDetails = await resp.data;
@@ -43,6 +40,20 @@ function Cart() {
         }
         getCart()
     }, [])
+
+    // async function QuantityInCart() {
+    //     let userId = localStorage.getItem("userId")
+    //     const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+    //     const data = await resp.data;
+
+    //     // const QuantityCart = data.cart.map((cartItems) => {
+    //     //     cartItems.id === productId ? { ...cartItems, cartQty: cartItems.cartQty + 1 } : cartItems
+    //     // })
+
+    //     await axios.patch(`http://localhost:3000/users/${userId}`, {
+
+    //     });
+    // }
     return (
         <div>
             <Navbar />
@@ -82,13 +93,13 @@ function Cart() {
                                         <p className="text-gray-600 font-[verdana] text-sm"> Type: {val.type}</p>
                                         <p className="text-gray-600 font-[verdana] text-sm"> Frame: {val.frame}</p>
                                         <p className="text-green-600 text-lg font-semibold"> $ {val.price}</p>
-                                        <div className='flex'>
-                                            <button className="bg-gray-200 text-gray-700 text-xs font-bold px-3 py-2 rounded-lg hover:bg-green-700 cursor-pointer">
+                                        <div className='flex justify-center mt-4'>
+                                            <button className="bg-gray-200 text-gray-700 text-xs font-bold px-3 rounded hover:bg-gray-300 hover:text-white cursor-pointer me-2" >
                                                 -
                                             </button>
 
-                                            <p>1</p>
-                                            <button className="bg-gray-200 text-gray-700 text-xs font-bold px-3 py-2 rounded-lg hover:bg-green-700 cursor-pointer">
+                                            <p>{val.cartQty}</p>
+                                            <button className="bg-gray-200 text-gray-700 text-xs font-bold px-3 rounded hover:bg-gray-300 hover:text-white cursor-pointer ms-2" >
                                                 +
                                             </button>
                                         </div>

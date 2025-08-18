@@ -6,6 +6,7 @@ export const searchContext = createContext();
 function Context({ children }) {
     let [search, setSearch] = useState("");
     let [user, setUser] = useState('');
+    let [focus, setFocus] = useState(false);
     // let [addtocart, setAddtocart] = useState(JSON.parse(localStorage.getItem("cartValue") || []));
 
 
@@ -25,7 +26,7 @@ function Context({ children }) {
     // console.log('USER', user)
     return (
         <div>
-            <searchContext.Provider value={{ search, setSearch, user, setUser }}>
+            <searchContext.Provider value={{ search, setSearch, user, setUser, focus, setFocus }}>
                 {children}
             </searchContext.Provider>
         </div>

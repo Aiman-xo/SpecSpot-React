@@ -1,31 +1,25 @@
 {
   "users": [
     {
-      "id": "e8ba",
-      "name": "athul",
-      "email": "athul@gmail.com",
-      "password": "123",
-      "confirmPass": "123",
+      "id": "5798",
+      "name": "john",
+      "email": "john@gmail.com",
+      "password": "1010",
+      "confirmPass": "1010",
+      "role": "user",
       "cart": [],
       "wishlist": []
     },
     {
-      "id": "e90e",
-      "name": "akhil",
-      "email": "akhil@gmail.com",
+      "id": "b634",
+      "name": "shalabi Minhaj",
+      "email": "shalabi@gmail.com",
       "password": "123",
       "confirmPass": "123",
+      "role": "user",
       "cart": [],
-      "wishlist": []
-    },
-    {
-      "id": "78d3",
-      "name": "abeen",
-      "email": "abeen@gmail.com",
-      "password": "234",
-      "confirmPass": "234",
-      "cart": [],
-      "wishlist": []
+      "wishlist": [],
+      "qty": 1
     }
   ],
   "products": [
@@ -38,6 +32,7 @@
       "frame_material": "Metal",
       "lens_type": "Polarized",
       "quantity": 1,
+      "cartQty": 1,
       "price": 149.99
     },
     {
@@ -49,6 +44,7 @@
       "frame_material": "O-Matter",
       "lens_type": "Prizm",
       "quantity": 1,
+      "cartQty": 1,
       "price": 179.99
     },
     {
@@ -60,6 +56,7 @@
       "frame_material": "Metal",
       "lens_type": "Polarized",
       "quantity": 1,
+      "cartQty": 1,
       "price": 149.99
     },
     {
@@ -71,6 +68,7 @@
       "frame_material": "O-Matter",
       "lens_type": "Prizm",
       "quantity": 1,
+      "cartQty": 1,
       "price": 179.99
     },
     {
@@ -82,6 +80,7 @@
       "frame_material": "Acetate",
       "lens_type": "Gradient",
       "quantity": 1,
+      "cartQty": 1,
       "price": 295
     },
     {
@@ -93,6 +92,7 @@
       "frame_material": "Acetate",
       "lens_type": "Polarized",
       "quantity": 1,
+      "cartQty": 1,
       "price": 215
     },
     {
@@ -104,6 +104,7 @@
       "frame_material": "Metal",
       "lens_type": "Solid",
       "quantity": 1,
+      "cartQty": 1,
       "price": 280.75
     },
     {
@@ -115,6 +116,7 @@
       "frame_material": "Nylon",
       "lens_type": "PolarizedPlus2",
       "quantity": 1,
+      "cartQty": 1,
       "price": 199.99
     },
     {
@@ -126,6 +128,7 @@
       "frame_material": "Metal",
       "lens_type": "Mirrored",
       "quantity": 1,
+      "cartQty": 1,
       "price": 310
     },
     {
@@ -137,6 +140,7 @@
       "frame_material": "Acetate",
       "lens_type": "Gradient",
       "quantity": 1,
+      "cartQty": 1,
       "price": 365.5
     },
     {
@@ -148,6 +152,7 @@
       "frame_material": "Metal",
       "lens_type": "Solid",
       "quantity": 1,
+      "cartQty": 1,
       "price": 210.25
     },
     {
@@ -159,6 +164,7 @@
       "frame_material": "Metal",
       "lens_type": "Gradient",
       "quantity": 1,
+      "cartQty": 1,
       "price": 420
     },
     {
@@ -170,6 +176,7 @@
       "frame_material": "Acetate",
       "lens_type": "Solid",
       "quantity": 1,
+      "cartQty": 1,
       "price": 275.99
     },
     {
@@ -181,6 +188,7 @@
       "frame_material": "Plastic",
       "lens_type": "Polarized",
       "quantity": 1,
+      "cartQty": 1,
       "price": 145
     },
     {
@@ -192,6 +200,7 @@
       "frame_material": "Metal",
       "lens_type": "Mirrored",
       "quantity": 1,
+      "cartQty": 1,
       "price": 165
     },
     {
@@ -203,6 +212,7 @@
       "frame_material": "Acetate",
       "lens_type": "Gradient",
       "quantity": 1,
+      "cartQty": 1,
       "price": 399.99
     },
     {
@@ -214,6 +224,7 @@
       "frame_material": "Nylon",
       "lens_type": "Polarized",
       "quantity": 1,
+      "cartQty": 1,
       "price": 189
     },
     {
@@ -225,6 +236,7 @@
       "frame_material": "Metal",
       "lens_type": "Mirrored",
       "quantity": 1,
+      "cartQty": 1,
       "price": 140.5
     },
     {
@@ -236,6 +248,7 @@
       "frame_material": "Acetate",
       "lens_type": "Solid",
       "quantity": 1,
+      "cartQty": 1,
       "price": 175.25
     },
     {
@@ -247,6 +260,7 @@
       "frame_material": "Metal",
       "lens_type": "Gradient",
       "quantity": 1,
+      "cartQty": 1,
       "price": 220
     }
   ]

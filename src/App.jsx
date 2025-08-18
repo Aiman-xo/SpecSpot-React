@@ -6,6 +6,7 @@ import Products from "./pages/Products"
 import Cart from "./pages/cart"
 import Wishlist from "./pages/Wishlist"
 import Induvidual from "./featured/Induvidual"
+import Profile from "./featured/profile"
 import Context from "./Context-API/context"
 
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
@@ -31,6 +32,7 @@ function App() {
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/wishlist" element={<Wishlist />}></Route>
             <Route path="/induvidual/:id" element={<Induvidual />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
 
 
           </Routes>

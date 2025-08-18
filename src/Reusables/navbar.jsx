@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { searchContext } from '../Context-API/context';
+// import { User } from "lucide-react"
 import axios from 'axios';
 
 
 
 function Navbar() {
     let [isMenuOpen, setIsMenuOpen] = useState(false);
-    let { search, setSearch } = useContext(searchContext);
+    let { search, setSearch, setFocus } = useContext(searchContext);
     let [cartlength, setCartlength] = useState([]);
     let [wishlength, setWishLength] = useState([]);
     let nav = useNavigate();
@@ -28,9 +29,50 @@ function Navbar() {
     })
 
     function LogOut() {
-        localStorage.removeItem("userId");
-        alert('loggin out....')
-        nav('/login')
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert("please login first");
+            nav('/login')
+        }
+        else {
+            localStorage.removeItem("userId");
+            alert('loggin out....')
+            nav('/login')
+        }
+
+    }
+
+    function LgCheckforWishlist() {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert("please login first");
+            nav('/login')
+        }
+        else {
+            nav('/wishlist')
+        }
+    }
+
+    function LgCheckforProfile() {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert("please login first");
+            nav('/login')
+        }
+        else {
+            nav('/profile')
+        }
+    }
+
+    function LgCheckforCart() {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert("please login first");
+            nav('/login')
+        }
+        else {
+            nav('/cart')
+        }
     }
 
     return (
@@ -41,7 +83,7 @@ function Navbar() {
 
                 {/* Brand Logo/Name */}
                 <div className="flex items-center">
-                    <Link href="#" className="text-2xl font-bold text-blue-600">
+                    <Link to={'/'} className="text-2xl font-bold text-blue-600">
                         <i>
                             <h1 className="text-xl sm:text-3xl font-bold text-gray-400">
                                 <span className="font-[verdana]">S</span>pec
@@ -58,7 +100,7 @@ function Navbar() {
                             type="text"
                             placeholder="Search for glasses, brands..."
                             className="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            onChange={(e) => setSearch(e.target.value)} />
+                            onChange={(e) => setSearch(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} />
                         <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -91,8 +133,30 @@ function Navbar() {
 
                 {/* Navigation Icons */}
                 <div className="flex items-center space-x-6">
+                    <div className="hidden md:flex items-center space-x-3">
+                        <button
+
+                            className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white hover:bg-gray-200 transition cursor-pointer"
+                            onClick={LgCheckforProfile}>
+                            {/* User Icon (Proper SVG) */}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-6 h-6"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
+                                <path
+                                    fillRule="evenodd"
+                                    d="M4 20c0-3.31 3.58-6 8-6s8 2.69 8 6v1H4v-1z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                            <span className="text-gray-700 hover:text-gray-600 hidden sm:inline-block">Profile</span>
+                        </button>
+                    </div>
                     {/* Wishlist */}
-                    <Link to={'/wishlist'} className="text-gray-700 hover:text-blue-600 relative">
+                    <button className="text-gray-700 hover:text-blue-600 relative cursor-pointer" onClick={LgCheckforWishlist}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -110,10 +174,10 @@ function Navbar() {
                         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                             {wishlength.length}
                         </span>
-                    </Link>
+                    </button>
 
                     {/* Cart */}
-                    <Link to={'/cart'} className="text-gray-700 hover:text-blue-600 relative">
+                    <button className="text-gray-700 hover:text-blue-600 relative cursor-pointer" onClick={LgCheckforCart}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -131,10 +195,10 @@ function Navbar() {
                         <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                             {cartlength.length}
                         </span>
-                    </Link>
+                    </button>
 
                     {/* Logout (Desktop Only) */}
-                    <button className="text-gray-700 hover:text-blue-600 hidden sm:inline-block" onClick={LogOut}>
+                    <button className="text-gray-700 hover:text-blue-600 hidden sm:inline-block cursor-pointer" onClick={LogOut}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -183,8 +247,11 @@ function Navbar() {
                     <Link to={'/products'} className="block py-2 text-gray-700 hover:text-blue-600">
                         Product
                     </Link>
+                    <Link to="/profile" className="block py-2 text-gray-700 hover:text-blue-600">
+                        Profile
+                    </Link>
                     {/* Logout in Mobile Menu */}
-                    <button className="block py-2 text-red-700 hover:text-blue-600">
+                    <button className="block py-2 text-red-700 hover:text-blue-600" onClick={LogOut}>
                         Logout
                     </button>
                 </div>

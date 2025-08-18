@@ -56,6 +56,7 @@ function Rgister() {
             email: state.email,
             password: state.password,
             confirmPass: state.confirmPass,
+            role: 'user',
             cart: [],
             wishlist: []
         })

@@ -13,10 +13,10 @@ function Products() {
 
     let [products, setProducts] = useState([]);
     let [details, setDetails] = useState(products);
-    let [liked, setLiked] = useState({});
+    // let [liked, setLiked] = useState({});
     let [notfound, setNotfound] = useState('');
     let [wishlist1, setWishlist] = useState([]);
-    const { search } = useContext(searchContext);
+    const { search, focus } = useContext(searchContext);
     const { user } = useContext(searchContext);
     let navigate = useNavigate();
     // const { addtocart, setAddtocart } = useContext(searchContext);
@@ -93,17 +93,7 @@ function Products() {
         setDetails(amountFilter)
     }
 
-    // function AddtoCart(Vid, Vbrand, Vmodel, Vprice, Vimage, Vtype, Vframe, Vqty) {
-    //     if (addtocart.filter((val) => {
-    //         return val.id === Vid
-    //     }).length > 0) {
-    //         alert(`${Vbrand} already exists in the cart!`)
-    //     }
-    //     else {
-    //         setAddtocart((pre) => [...pre, { id: Vid, brand: Vbrand, model: Vmodel, price: Vprice, image: Vimage, type: Vtype, frame: Vframe, qty: Vqty }]);
-    //         alert('item added to cart')
-    //     }
-    // }
+
 
 
     async function AddtoCart(val, ID) {
@@ -127,6 +117,7 @@ function Products() {
 
                 await axios.patch(`http://localhost:3000/users/${userId}`, {
                     cart: [...data.cart, val]
+
 
                 })
 
@@ -175,7 +166,7 @@ function Products() {
                 await axios.patch(`http://localhost:3000/users/${userId}`, {
                     wishlist: updatedWishlist
                 });
-                alert(`${val.brand} is one of your liking`)
+                // alert(`${val.brand} is one of your liking`)
                 setWishlist(updatedWishlist);
 
             }
@@ -198,7 +189,7 @@ function Products() {
             })
             setWishlist(newFiltered)
 
-            alert(`${val.brand} removed from wishlist`)
+            // alert(`${val.brand} removed from wishlist`)
         }
 
 
@@ -206,9 +197,11 @@ function Products() {
     return (
         <div >
             <Navbar />
+            {
+                !focus && (<Link ><img src="https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-mavericks.png"
+                    alt="" className='cursor-pointer hover:scale-101 transition-transform duration-500' /></Link>)
+            }
 
-            <Link ><img src="https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-mavericks.png"
-                alt="" className='cursor-pointer hover:scale-101 transition-transform duration-500' /></Link>
 
             <div className=''>
                 <h2 className='text-center mt-4 font-bold text-xl font-[verdana] text-gray-600'>Our Products</h2>
