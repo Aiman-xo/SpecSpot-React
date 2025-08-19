@@ -4,6 +4,7 @@ import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import '../mystyle.css'
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 function Featured() {
     let [data, setData] = useState([]);
@@ -30,7 +31,8 @@ function Featured() {
 
         let userId = localStorage.getItem("userId");
         if (!userId) {
-            alert('please log in first!')
+            // alert('please log in first!')
+            toast.warning('please login first..')
             navigate('/login')
             return
         }
@@ -38,7 +40,8 @@ function Featured() {
         const data = await UserData.data;
 
         if (data.cart.find(item => item.id === ID)) {
-            alert(`${val.brand} already in the cart`)
+            // alert(`${val.brand} already in the cart`)
+            toast.error(`${val.brand} is already in the cart`)
         }
         else {
             let userId = localStorage.getItem("userId");
@@ -58,7 +61,8 @@ function Featured() {
             //     return
 
             // }
-            alert(`${val.brand} added to cart`)
+            // alert(`${val.brand} added to cart`)
+            toast.success(`${val.brand} added to the cart`)
 
         }
 
@@ -71,40 +75,7 @@ function Featured() {
 
 
 
-    async function AddtoCart(val, ID) {
 
-        let userId = localStorage.getItem("userId");
-        if (!userId) {
-            alert('please log in first!')
-            navigate('/login')
-            return;
-        }
-        const UserData = await axios.get(`http://localhost:3000/users/${userId}`);
-        const data = await UserData.data;
-
-        if (data.cart.find(item => item.id === ID)) {
-            alert(`${val.brand} already in the cart`)
-        }
-        else {
-            let userId = localStorage.getItem("userId");
-            console.log('user', userId)
-            if (userId) {
-
-                await axios.patch(`http://localhost:3000/users/${userId}`, {
-                    cart: [...data.cart, val],
-
-                })
-
-            }
-            alert(`${val.brand} added to cart`)
-
-        }
-
-
-
-
-
-    }
 
 
     async function wishlist(val, ID) {
@@ -124,7 +95,8 @@ function Featured() {
 
             const userId = localStorage.getItem("userId")
             if (!userId) {
-                alert('please log in first!')
+                // alert('please log in first!')
+                toast.warning('please login first..')
                 navigate('/login')
                 return
             }
@@ -133,7 +105,8 @@ function Featured() {
             const data = await resp.data;
 
             if (data.wishlist.find((item) => item.id === ID)) {
-                alert(`${val.brand} already in wishlist`)
+                // alert(`${val.brand} already in wishlist`)
+                toast.error(`${val.brand} is already in the wishlist`)
             }
             else {
                 const updatedWishlist = [...data.wishlist, val]

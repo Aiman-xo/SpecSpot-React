@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Reusables/navbar';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Wishlist() {
 
@@ -31,12 +32,13 @@ function Wishlist() {
             wishlist: filtered
         })
         setWishlistItem(filtered)
+        toast.error(`${Brand} removed from wishlist`)
     }
     return (
         <div>
             <Navbar />
             <div className=''>
-                <h2 className='text-center mt-4 font-bold text-xl font-[verdana] text-gray-600'>Cart products:</h2>
+                <h2 className='text-center mt-4 font-bold text-xl font-[verdana] text-gray-600'>Wishlist:</h2>
             </div>
 
 

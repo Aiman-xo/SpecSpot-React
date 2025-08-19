@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../Reusables/navbar';
+import { toast } from "react-toastify";
 
 function Induvidual() {
     let { id } = useParams();
@@ -19,21 +20,25 @@ function Induvidual() {
         GetInduvidualProduct();
     }, [id])
 
-    async function AddtoCart(Product) {
+    async function AddtoCart(Product, ID, brand) {
         const userId = localStorage.getItem("userId");
         if (!userId) {
-            alert('please login first!');
+            toast.warning('please login')
             nav('/login')
         }
         const resp = await axios.get(`http://localhost:3000/users/${userId}`);
         const data = await resp.data;
 
+        if (data.cart.find((item) => item.id === ID)) {
+            toast.error(`${brand} already in the cart`)
+        } else {
+            await axios.patch(`http://localhost:3000/users/${userId}`, {
+                cart: [...data.cart, Product]
+            })
+            toast.success(`${Product.brand} is added to you cart`)
+        }
 
 
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
-            cart: [...data.cart, Product]
-        })
-        alert(`${Product.brand} is added to your cart`)
     }
 
 
@@ -75,7 +80,7 @@ function Induvidual() {
 
                             {/* Buttons */}
                             <div className="flex gap-4">
-                                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual)}>
+                                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)}>
                                     Add to Cart
                                 </button>
                                 {/* <button className="border border-gray-400 hover:border-red-500 hover:text-red-500 px-6 py-2 rounded-lg shadow-md">

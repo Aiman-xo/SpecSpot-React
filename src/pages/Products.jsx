@@ -6,6 +6,7 @@ import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import { useState } from 'react'
 import { data, Link, useNavigate } from 'react-router-dom';
 import '../mystyle.css'
+import { toast } from "react-toastify";
 // import { data } from 'react-router-dom';
 import { searchContext } from '../Context-API/context';
 
@@ -22,27 +23,27 @@ function Products() {
     // const { addtocart, setAddtocart } = useContext(searchContext);
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (search.trim() === '') {
-            setDetails(products);
-            setNotfound('');
-        }
-        else {
-            setNotfound('');
-            const searchArr = products.filter((val) => {
-                return val.brand.toLowerCase().includes(search.toLowerCase())
-            })
-            setDetails(searchArr)
+    //     if (search.trim() === '') {
+    //         setDetails(products);
+    //         setNotfound('');
+    //     }
+    //     else {
+    //         setNotfound('');
+    //         const searchArr = products.filter((val) => {
+    //             return val.brand.toLowerCase().includes(search.toLowerCase())
+    //         })
+    //         setDetails(searchArr)
 
-            if (searchArr.length === 0) {
+    //         if (searchArr.length === 0) {
 
-                setNotfound('No Products Found!')
-            }
-        }
+    //             setNotfound('No Products Found!')
+    //         }
+    //     }
 
 
-    }, [search])
+    // }, [search])
 
     useEffect(() => {
         async function ProductList() {
@@ -100,7 +101,7 @@ function Products() {
 
         let userId = localStorage.getItem("userId");
         if (!userId) {
-            alert('please log in first!')
+            toast.warning('please login first..')
             navigate('/login')
             return;
         }
@@ -108,7 +109,8 @@ function Products() {
         const data = await UserData.data;
 
         if (data.cart.find(item => item.id === ID)) {
-            alert(`${val.brand} already in the cart`)
+            // alert(`${val.brand} already in the cart`)
+            toast.error(`${val.brand} is already in the cart`);
         }
         else {
             let userId = localStorage.getItem("userId");
@@ -122,7 +124,8 @@ function Products() {
                 })
 
             }
-            alert(`${val.brand} added to cart`)
+            // alert(`${val.brand} added to cart`)
+            toast.success(`${val.brand} added to the cart`);
 
         }
 
@@ -150,7 +153,8 @@ function Products() {
 
             const userId = localStorage.getItem("userId")
             if (!userId) {
-                alert('please log in first!')
+                // alert('please log in first!')
+                toast.warning('please login first..')
                 navigate('/login')
                 return
             }
@@ -159,7 +163,8 @@ function Products() {
             const data = await resp.data;
 
             if (data.wishlist.find((item) => item.id === ID)) {
-                alert(`${val.brand} already in wishlist`)
+                // alert(`${val.brand} already in wishlist`)
+                toast.error(`${val.brand} is already in the wishlist`)
             }
             else {
                 const updatedWishlist = [...data.wishlist, val]

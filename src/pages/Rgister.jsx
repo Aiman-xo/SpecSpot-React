@@ -41,6 +41,11 @@ function reducFun(prev, action) {
                 ...prev,
                 error: action.payLoad
             }
+        case 'email-type-error':
+            return {
+                ...prev,
+                error: action.payLoad
+            }
     }
 }
 
@@ -133,7 +138,7 @@ function Rgister() {
                                 onChange={(e) => dispatch({
                                     type: 'get-email',
                                     payLoad: e.target.value
-                                })} />
+                                })} required />
                         </div>
 
                         <div className='relative'>

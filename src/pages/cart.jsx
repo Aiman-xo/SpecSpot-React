@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Reusables/navbar'
+import { toast } from "react-toastify";
 // import { useContext } from 'react'
 // import { searchContext } from '../Context-API/context'
 import '../mystyle.css'
@@ -10,13 +11,13 @@ function Cart() {
     // let { addtocart, setAddtocart } = useContext(searchContext);
     let [userDetail, setuserDetails] = useState({ cart: [] });
     let nav = useNavigate()
-    let [count, setCount] = useState(0);
+    // let [count, setCount] = useState(0);
 
 
 
     async function RemoveCartItem(removeInd, removedProduct) {
         let userId = localStorage.getItem("userId")
-        alert(`removed item ${removedProduct}`)
+        toast.error(`${removedProduct} is removed from your cart`)
         const filtered = userDetail.cart.filter((val) => {
 
             return val.id !== removeInd
@@ -41,17 +42,19 @@ function Cart() {
         getCart()
     }, [])
 
-    // async function QuantityInCart() {
+    // async function QuantityInCart(productId) {
     //     let userId = localStorage.getItem("userId")
     //     const resp = await axios.get(`http://localhost:3000/users/${userId}`);
     //     const data = await resp.data;
 
-    //     // const QuantityCart = data.cart.map((cartItems) => {
-    //     //     cartItems.id === productId ? { ...cartItems, cartQty: cartItems.cartQty + 1 } : cartItems
-    //     // })
+    //     const QuantityCart = data.cart.map((cartItems) => {
+    //         cartItems.id === productId ? { ...cartItems, cartQty: cartItems.cartQty + 1 } : cartItems
+    //     })
+    //     console.log(data.cart);
+    //     console.log(QuantityCart);
 
     //     await axios.patch(`http://localhost:3000/users/${userId}`, {
-
+    //         cart: QuantityCart
     //     });
     // }
     return (
@@ -98,7 +101,7 @@ function Cart() {
                                                 -
                                             </button>
 
-                                            <p>{val.cartQty}</p>
+                                            <p>1</p>
                                             <button className="bg-gray-200 text-gray-700 text-xs font-bold px-3 rounded hover:bg-gray-300 hover:text-white cursor-pointer ms-2" >
                                                 +
                                             </button>
