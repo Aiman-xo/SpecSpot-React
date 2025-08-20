@@ -1,24 +1,24 @@
 {
   "users": [
     {
-      "id": "bafb",
-      "name": "anshif",
-      "email": "anshif@gmail.com",
+      "id": "99cc",
+      "name": "aiman",
+      "email": "aiman@gamil.com",
       "password": "123",
       "confirmPass": "123",
       "role": "user",
       "cart": [
         {
-          "id": "12",
-          "brand": "Dior",
-          "image": "https://product.visiofactory.com/img/p/1/0/1/1/9/0/101190-thickbox.jpg",
-          "model": "Stellaire1",
+          "id": "10",
+          "brand": "Tom Ford",
+          "image": "https://ainak.pk/wp-content/uploads/2024/08/rb-4202-3.webp",
+          "model": "FT0237",
           "type": "sunglass",
-          "frame_material": "Metal",
+          "frame_material": "Acetate",
           "lens_type": "Gradient",
           "quantity": 1,
-          "cartQty": 1,
-          "price": 420
+          "cartQty": 2,
+          "price": 365.5
         },
         {
           "id": "6",
@@ -33,68 +33,20 @@
           "price": 215
         },
         {
-          "id": "17",
-          "brand": "Costa Del Mar",
-          "image": "https://www.crazyspects.com/mid-size-image/4752.webp",
-          "model": "Fantail",
-          "type": "transparent",
-          "frame_material": "Nylon",
-          "lens_type": "Polarized",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 189
-        },
-        {
-          "id": "18",
-          "brand": "Armani Exchange",
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ4SXxg4-ZgUz8Nba2B60dDvHFAyGUcaq8q2-JJZgOWAjMl-mb_ol9HSNWMVM7G2rWtGM&usqp=CAU",
-          "model": "AX2012S",
-          "type": "transparent",
-          "frame_material": "Metal",
-          "lens_type": "Mirrored",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 140.5
-        },
-        {
-          "id": "1",
-          "brand": "Ray-Ban",
-          "image": "/src/assets/images/front-view-modern-sunglasses-modern-grey-desk-isolated-vision-spectacles-elegance.jpg",
-          "model": "Aviator Classic",
+          "id": "4",
+          "brand": "Oakley",
+          "model": "Holbrook",
           "type": "normal",
-          "frame_material": "Metal",
-          "lens_type": "Polarized",
+          "image": "/src/assets/images/sunglasses (2).jpg",
+          "frame_material": "O-Matter",
+          "lens_type": "Prizm",
           "quantity": 1,
-          "cartQty": 1,
-          "price": 149.99
-        },
-        {
-          "id": "7",
-          "brand": "Prada",
-          "image": "/src/assets/images/sunglasses.jpg",
-          "model": "PR 09VS",
-          "type": "sunglass",
-          "frame_material": "Metal",
-          "lens_type": "Solid",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 280.75
+          "cartQty": 2,
+          "price": 179.99
         }
       ],
       "wishlist": [
         {
-          "id": "3",
-          "brand": "Ray-Ban",
-          "model": "Aviator Classic",
-          "type": "normal",
-          "image": "/src/assets/images/eyeglasses-wear (1).jpg",
-          "frame_material": "Metal",
-          "lens_type": "Polarized",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 149.99
-        },
-        {
           "id": "4",
           "brand": "Oakley",
           "model": "Holbrook",
@@ -105,114 +57,9 @@
           "quantity": 1,
           "cartQty": 1,
           "price": 179.99
-        }
-      ]
-    },
-    {
-      "id": "716b",
-      "name": "john",
-      "email": "john@gmail.com",
-      "password": "234",
-      "confirmPass": "234",
-      "role": "user",
-      "cart": [],
-      "wishlist": []
-    },
-    {
-      "id": "ce83",
-      "name": "aiman",
-      "email": "aiman@gmail.com",
-      "password": "12345678",
-      "confirmPass": "12345678",
-      "role": "user",
-      "cart": [
-        {
-          "id": "5",
-          "brand": "Gucci",
-          "image": "src/assets/images/jeremy-budiman-hpG0qRo_e84-unsplash.jpg",
-          "model": "GG0061S",
-          "type": "normal",
-          "frame_material": "Acetate",
-          "lens_type": "Gradient",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 295
-        },
-        {
-          "id": "4",
-          "brand": "Oakley",
-          "model": "Holbrook",
-          "type": "normal",
-          "image": "/src/assets/images/sunglasses (2).jpg",
-          "frame_material": "O-Matter",
-          "lens_type": "Prizm",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 179.99
-        },
-        {
-          "id": "3",
-          "brand": "Ray-Ban",
-          "model": "Aviator Classic",
-          "type": "normal",
-          "image": "/src/assets/images/eyeglasses-wear (1).jpg",
-          "frame_material": "Metal",
-          "lens_type": "Polarized",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 149.99
-        },
-        {
-          "id": "1",
-          "brand": "Ray-Ban",
-          "image": "/src/assets/images/front-view-modern-sunglasses-modern-grey-desk-isolated-vision-spectacles-elegance.jpg",
-          "model": "Aviator Classic",
-          "type": "normal",
-          "frame_material": "Metal",
-          "lens_type": "Polarized",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 149.99
         }
       ],
-      "wishlist": [
-        {
-          "id": "2",
-          "brand": "Oakley",
-          "image": "/src/assets/images/sunglasses (1).jpg",
-          "model": "Holbrook",
-          "type": "sunglass",
-          "frame_material": "O-Matter",
-          "lens_type": "Prizm",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 179.99
-        },
-        {
-          "id": "3",
-          "brand": "Ray-Ban",
-          "model": "Aviator Classic",
-          "type": "normal",
-          "image": "/src/assets/images/eyeglasses-wear (1).jpg",
-          "frame_material": "Metal",
-          "lens_type": "Polarized",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 149.99
-        },
-        {
-          "id": "4",
-          "brand": "Oakley",
-          "model": "Holbrook",
-          "type": "normal",
-          "image": "/src/assets/images/sunglasses (2).jpg",
-          "frame_material": "O-Matter",
-          "lens_type": "Prizm",
-          "quantity": 1,
-          "cartQty": 1,
-          "price": 179.99
-        }
-      ]
+      "orders": []
     }
   ],
   "products": [

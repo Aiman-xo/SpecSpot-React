@@ -143,7 +143,9 @@ function Navbar() {
                                 type="text"
                                 placeholder="Search for glasses, brands..."
                                 className="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                onChange={(e) => setSearch(e.target.value)} onFocus={() => setFocus(true)} />
+                                onChange={(e) => setSearch(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setTimeout(() => {
+                                    setFocus(false)
+                                }, 300)} />
                             <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -308,8 +310,9 @@ function Navbar() {
                 {focus && search.length > 0 &&
                     details.map((val) => {
                         return <Link to={`/induvidual/${val.id}`} onClick={() => {
-                            setFocus(false)
                             setSearch('')
+                            setFocus(false)
+
                         }} key={val.id}>
                             <div className='p-3 hover:bg-gray-500 hover:text-white hover:rounded' >{
                             }

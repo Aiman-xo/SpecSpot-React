@@ -83,9 +83,9 @@ function Induvidual() {
                                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)}>
                                     Add to Cart
                                 </button>
-                                {/* <button className="border border-gray-400 hover:border-red-500 hover:text-red-500 px-6 py-2 rounded-lg shadow-md">
-                                    ❤️ Wishlist
-                                </button> */}
+                                <button className="bg-green-600 text-white  px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => nav('/orders')}>
+                                    Buy Now
+                                </button>
                             </div>
                         </div>
 

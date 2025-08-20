@@ -34,6 +34,27 @@ function Wishlist() {
         setWishlistItem(filtered)
         toast.error(`${Brand} removed from wishlist`)
     }
+
+    async function AddtoCart(Product, ID, brand) {
+        const userId = localStorage.getItem("userId");
+        // if (!userId) {
+        //     toast.warning('please login')
+        //     nav('/login')
+        // }
+        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const data = await resp.data;
+
+        if (data.cart.find((item) => item.id === ID)) {
+            toast.error(`${brand} already in the cart`)
+        } else {
+            await axios.patch(`http://localhost:3000/users/${userId}`, {
+                cart: [...data.cart, Product]
+            })
+            toast.success(`${brand} is added to you cart`)
+        }
+
+
+    }
     return (
         <div>
             <Navbar />
@@ -73,20 +94,10 @@ function Wishlist() {
                                         <p className="text-gray-600 font-[verdana] text-sm"> Type: {val.type}</p>
                                         <p className="text-gray-600 font-[verdana] text-sm"> Frame: {val.frame}</p>
                                         <p className="text-green-600 text-lg font-semibold"> $ {val.price}</p>
-                                        <div className='flex'>
-                                            <button className="bg-gray-200 text-gray-700 text-xs font-bold px-3 py-2 rounded-lg hover:bg-green-700 cursor-pointer">
-                                                -
-                                            </button>
-
-                                            <p>1</p>
-                                            <button className="bg-gray-200 text-gray-700 text-xs font-bold px-3 py-2 rounded-lg hover:bg-green-700 cursor-pointer">
-                                                +
-                                            </button>
-                                        </div>
 
                                         <div className="flex gap-4 justify-center mt-4">
-                                            <button className="bg-green-600 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-green-700 cursor-pointer">
-                                                Buy Now
+                                            <button className="bg-yellow-500 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-yellow-600 cursor-pointer" onClick={() => AddtoCart(val, val.id, val.brand)}>
+                                                Add to Cart
                                             </button>
                                             <button className="bg-red-500 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-red-600 cursor-pointer"
                                                 onClick={() => RemoveWishlist(val.id, val.brand)}>

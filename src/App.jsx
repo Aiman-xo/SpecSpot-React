@@ -8,6 +8,8 @@ import Products from "./pages/Products"
 import Cart from "./pages/cart"
 import Wishlist from "./pages/Wishlist"
 import Induvidual from "./featured/Induvidual"
+// import Orderpage from "./pages/orderpage";
+import ShippingPage from "./pages/orderpage";
 import Profile from "./featured/profile"
 
 import Context from "./Context-API/context"
@@ -38,6 +40,7 @@ function App() {
             <Route path="/wishlist" element={<Wishlist />}></Route>
             <Route path="/induvidual/:id" element={<Induvidual />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/orders" element={<ShippingPage />}></Route>
 
 
           </Routes>

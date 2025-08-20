@@ -63,7 +63,8 @@ function Rgister() {
             confirmPass: state.confirmPass,
             role: 'user',
             cart: [],
-            wishlist: []
+            wishlist: [],
+            orders: []
         })
     }
 
