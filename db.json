@@ -163,28 +163,56 @@
       "wishlist": [],
       "orders": [
         {
-          "id": 192,
+          "id": 877,
           "products": [
             {
-              "id": "3",
-              "brand": "Ray-Ban",
-              "model": "Aviator Classic",
-              "type": "normal",
-              "image": "/src/assets/images/eyeglasses-wear (1).jpg",
-              "frame_material": "Metal",
-              "lens_type": "Polarized",
+              "id": "8",
+              "brand": "Maui Jim",
+              "image": "https://images.edel-optics.com/eoProductsGlassesSunglasses/640/nobg/Ray-Ban-RB2140-901-58.jpg",
+              "model": "Red Sands",
+              "type": "sunglass",
+              "frame_material": "Nylon",
+              "lens_type": "PolarizedPlus2",
               "quantity": 1,
               "cartQty": 1,
-              "price": 149.99
+              "price": 199.99
             }
           ],
+          "date": "Aug 21, 2025, 8:19 PM",
           "shipping": {
-            "fullname": "suhail",
-            "mainAddress": "kayal (H), baker street",
-            "phone": "1234567",
-            "city": "London",
-            "region": "newyork",
-            "pin": "54355",
+            "fullname": "werwe",
+            "mainAddress": "erwer",
+            "phone": "s",
+            "city": "ewrew",
+            "region": "ewrewr",
+            "pin": "erwewr",
+            "country": "United Kingdom"
+          }
+        },
+        {
+          "id": 861,
+          "products": [
+            {
+              "id": "4",
+              "brand": "Oakley",
+              "model": "Holbrook",
+              "type": "normal",
+              "image": "/src/assets/images/sunglasses (2).jpg",
+              "frame_material": "O-Matter",
+              "lens_type": "Prizm",
+              "quantity": 1,
+              "cartQty": 1,
+              "price": 179.99
+            }
+          ],
+          "date": "Aug 21, 2025, 8:25 PM",
+          "shipping": {
+            "fullname": "werwe",
+            "mainAddress": "erwer",
+            "phone": "a",
+            "city": "ewrew",
+            "region": "ewrewr",
+            "pin": "erwewr",
             "country": "United Kingdom"
           }
         }

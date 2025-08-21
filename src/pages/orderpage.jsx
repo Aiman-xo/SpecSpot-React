@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react'
 // import { useState } from 'react';
 import Navbar from '../Reusables/navbar';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
@@ -60,7 +60,8 @@ function reducerFun(prev, action) {
 function ShippingPage() {
     let [userObject, SetUserObject] = useState([]);
     let nav = useNavigate();
-    let [state, dispatch] = useReducer(reducerFun, {})
+    let [state, dispatch] = useReducer(reducerFun, {});
+    let [loading, setLoading] = useState(false);
     let userId = localStorage.getItem("userId");
     const shipping = 10;
 
@@ -73,18 +74,34 @@ function ShippingPage() {
         GetCartItems();
     }, [])
 
+    const location = useLocation();
+    const singleProduct = location.state?.induvidual || null;
+
+
+    const items = singleProduct ? [singleProduct] : userObject;
+
     async function PostShippingDetails() {
 
         if (state.fullName && state.address && state.phone && state.city && state.region && state.pin && state.country !== '') {
+            setLoading(true);
             const idNo = Math.floor(Math.random() * 1000);
 
             const resp = await axios.get(`http://localhost:3000/users/${userId}`);
             const data = await resp.data;
+            const productsToSave = singleProduct ? [singleProduct] : data.cart;
 
             await axios.patch(`http://localhost:3000/users/${userId}`, {
                 orders: [...data.orders, {
                     id: idNo,
-                    products: data.cart,
+                    products: productsToSave,
+                    date: new Date().toLocaleString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true
+                    }),
                     shipping: {
                         fullname: state.fullName,
                         mainAddress: state.address,
@@ -114,8 +131,14 @@ function ShippingPage() {
                 cart: []
 
             })
-            toast.success('ordered successfully')
-            nav('/orders/confirmed')
+            // toast.success('ordered successfully')
+
+            // nav('/orders/confirmed')
+            setTimeout(() => {
+                setLoading(false);
+                nav("/orders/confirmed");
+            }, 2000);
+
         }
         else {
             dispatch({
@@ -123,6 +146,8 @@ function ShippingPage() {
                 payLoad: 'fill your full address please !'
             })
         }
+
+
 
 
 
@@ -135,16 +160,76 @@ function ShippingPage() {
 
     //printing total logic
 
-    const total = userObject.reduce((acc, val) => {
+    const total = items.reduce((acc, val) => {
         const itemTotal = val.price * val.cartQty;
         return ((acc + itemTotal + (itemTotal * 0.10)))
     }, 0);
 
     const grandTotal = (total + shipping).toFixed(2);
+
+
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Navbar */}
             <Navbar />
+            {loading && <div className=" fixed flex inset-0 z-[9999] justify-center items-center bg-white">
+                {/* simple spinner */}
+                <div className="flex flex-col items-center justify-center bg-gray-100 p-8 px-20 rounded-2xl shadow-lg">
+                    {/* ⬅️ Grey div box with padding, rounded corners & shadow */}
+
+                    {/* ✅ Animated Tick */}
+                    <svg
+                        className="h-20 w-20 text-green-600 mb-4" // ⬅️ Added margin-bottom for spacing
+                        viewBox="0 0 72 72"
+                    >
+                        <circle
+                            className="stroke-current text-green-600"
+                            cx="36"
+                            cy="36"
+                            r="34"
+                            fill="none"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            strokeDasharray="213"
+                            strokeDashoffset="213"
+                        >
+                            <animate
+                                attributeName="stroke-dashoffset"
+                                from="213"
+                                to="0"
+                                dur="0.6s"
+                                fill="freeze"
+                            />
+                        </circle>
+                        <path
+                            className="stroke-current text-green-600"
+                            fill="none"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeDasharray="60"
+                            strokeDashoffset="60"
+                            d="M20 38l10 10 22-22"
+                        >
+                            <animate
+                                attributeName="stroke-dashoffset"
+                                from="60"
+                                to="0"
+                                dur="0.4s"
+                                begin="0.6s"
+                                fill="freeze"
+                            />
+                        </path>
+                    </svg>
+
+
+                    <p className="text-lg font-semibold text-gray-700">
+                        Order Placed
+                    </p>
+                </div>
+
+
+            </div>}
 
             <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto p-8">
                 {/* Shipping Address */}
@@ -324,7 +409,7 @@ function ShippingPage() {
                     {/* Cart Items */}
                     <div className="space-y-4">
 
-                        {userObject.map((val) => {
+                        {items.map((val) => {
                             return <div className="flex items-center justify-between" key={val.id}>
                                 <div>{val.brand} : ({val.cartQty})</div>
                                 <div></div>
@@ -341,14 +426,14 @@ function ShippingPage() {
                     <div className="space-y-2 text-gray-700">
                         <div className="flex justify-between">
                             <span>Subtotal</span>
-                            <span>$ {userObject.reduce((acc, val) => {
+                            <span>$ {items.reduce((acc, val) => {
                                 return acc + (val.price * val.cartQty)
                             }, 0)}</span>
                         </div>
 
                         <div className="flex justify-between ">
                             <span>Tax (10%)</span>
-                            <span>{userObject.reduce((acc, val) => {
+                            <span>{items.reduce((acc, val) => {
                                 const itemTotal = val.price * val.cartQty;
                                 return (acc + (itemTotal * 0.10))
                             }, 0).toFixed(2)}</span>
@@ -370,6 +455,8 @@ function ShippingPage() {
 
                 </div>
             </div>
+
+
         </div>
     )
 }

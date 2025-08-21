@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 function Induvidual() {
     let { id } = useParams();
     let [induvidual, setInduvidual] = useState([]);
+    let [loading, setLoading] = useState(false);
     let nav = useNavigate();
 
 
@@ -42,7 +43,15 @@ function Induvidual() {
     }
 
 
+    function InduvidualBuy() {
+        setLoading(true);
 
+        setTimeout(() => {
+            setLoading(false);
+            nav('/orders', { state: { induvidual } })
+
+        }, 2000);
+    }
 
 
 
@@ -52,6 +61,60 @@ function Induvidual() {
     return (
         <div>
             <Navbar />
+
+            {loading && (
+                <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-white">
+                    {/* simple spinner */}
+                    <div className="flex flex-col items-center justify-center p-8 px-20">
+                        <svg
+                            width="50"
+                            height="50"
+                            viewBox="0 0 40 40"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle
+                                cx="20"
+                                cy="20"
+                                r="18"
+                                fill="none"
+                                stroke="#f3f4f6"
+                                strokeWidth="4"
+                            />
+                            <circle
+                                cx="20"
+                                cy="20"
+                                r="18"
+                                fill="none"
+                                stroke="#3b82f6"
+                                strokeWidth="4"
+                                strokeLinecap="round"
+                                strokeDasharray="56.5 56.5"
+                                strokeDashoffset="0"
+                            >
+                                <animate
+                                    attributeName="stroke-dasharray"
+                                    values="0 113;28.25 84.75;0 113"
+                                    dur="1.4s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="stroke-dashoffset"
+                                    values="0;-28.25;-113"
+                                    dur="1.4s"
+                                    repeatCount="indefinite"
+                                />
+                            </circle>
+                        </svg>
+                        <p className="text-lg font-semibold text-gray-700 mt-4">Proceeding...</p>
+                    </div>
+                </div>
+            )}
+
+
+
+
+
+
             <div className="max-w-6xl mx-auto p-6 ">
                 {/* Product Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -83,7 +146,7 @@ function Induvidual() {
                                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)}>
                                     Add to Cart
                                 </button>
-                                <button className="bg-green-600 text-white  px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => nav('/orders')}>
+                                <button className="bg-green-600 text-white  px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => InduvidualBuy()}>
                                     Buy Now
                                 </button>
                             </div>

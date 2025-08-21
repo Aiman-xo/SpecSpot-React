@@ -11,6 +11,7 @@ function Cart() {
     // let { addtocart, setAddtocart } = useContext(searchContext);
     let [userDetail, setuserDetails] = useState({ cart: [] });
     let nav = useNavigate()
+    let [loading, setLoadaing] = useState(false);
     // let [count, setCount] = useState(0);
 
     //shipping sharge
@@ -93,12 +94,70 @@ function Cart() {
 
     const grandTotal = (total + shipping).toFixed(2);
 
+    function ProceedtoCheckOut() {
+        setLoadaing(true);
+        setTimeout(() => {
+            setLoadaing(false);
+            nav('/orders');
+
+        }, 2000)
+    }
+
     return (
 
 
 
         <div>
             <Navbar />
+
+            {loading && (
+                <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-white">
+                    {/* simple spinner */}
+                    <div className="flex flex-col items-center justify-center p-8 px-20">
+                        <svg
+                            width="50"
+                            height="50"
+                            viewBox="0 0 40 40"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle
+                                cx="20"
+                                cy="20"
+                                r="18"
+                                fill="none"
+                                stroke="#f3f4f6"
+                                strokeWidth="4"
+                            />
+                            <circle
+                                cx="20"
+                                cy="20"
+                                r="18"
+                                fill="none"
+                                stroke="#3b82f6"
+                                strokeWidth="4"
+                                strokeLinecap="round"
+                                strokeDasharray="56.5 56.5"
+                                strokeDashoffset="0"
+                            >
+                                <animate
+                                    attributeName="stroke-dasharray"
+                                    values="0 113;28.25 84.75;0 113"
+                                    dur="1.4s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="stroke-dashoffset"
+                                    values="0;-28.25;-113"
+                                    dur="1.4s"
+                                    repeatCount="indefinite"
+                                />
+                            </circle>
+                        </svg>
+                        <p className="text-lg font-semibold text-gray-700 mt-4">Proceeding...</p>
+                    </div>
+                </div>
+            )}
+
 
             <div className="">
                 <h2 className="text-center mt-4 font-bold text-xl font-[verdana] text-gray-600">
@@ -238,7 +297,7 @@ function Cart() {
                         </div>
 
                         {/* Checkout Button */}
-                        <button className="w-full mt-6 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => nav('/orders')}>
+                        <button className="w-full mt-6 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => ProceedtoCheckOut()}>
                             Proceed to Checkout
                         </button>
                     </div>

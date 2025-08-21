@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 
 function Profile() {
     let [userProfile, setUserProfile] = useState([]);
+    // let [orders, setOrders] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    let [orderId, setOrderId] = useState();
     let nav = useNavigate();
 
     useEffect(() => {
@@ -27,6 +30,31 @@ function Profile() {
         nav('/login')
     }
     // console.log(userProfile?.orders?.products)
+
+    async function CancelOrder(OrderID) {
+        setShowModal(false)
+        toast.error('order cancelled');
+        const userId = localStorage.getItem("userId");
+        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const data = resp.data;
+
+
+        const cancelOrder = data.orders.filter((item) => {
+            return item.id !== OrderID
+        })
+
+        await axios.patch(`http://localhost:3000/users/${userId}`, {
+            orders: cancelOrder
+        })
+
+        setUserProfile({ ...data, orders: cancelOrder });
+
+
+    }
+    function showConfirmation(orderId) {
+        setOrderId(orderId);
+        setShowModal(true)
+    }
 
 
 
@@ -64,11 +92,9 @@ function Profile() {
 
                 {/* Actions */}
                 <div className="flex justify-center gap-3">
-                    {/* <button className="px-4 py-2 text-sm bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-md hover:scale-105 transition-transform duration-200">
-                        Edit
-                    </button> */}
+
                     <button
-                        className="px-4 py-2 text-sm bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 hover:scale-105 transition-transform duration-200"
+                        className="px-4 py-2 text-sm bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 hover:scale-105 transition-transform duration-200 cursor-pointer"
                         onClick={LogOut}
                     >
                         Logout
@@ -76,8 +102,14 @@ function Profile() {
                 </div>
             </div>
 
+            <div className='text-center mt-10 font-bold font-[verdana] text-gray-500 text-lg'>Your Orders:</div>
+
             {/*this is the confirmed order section*/}
-            {
+            {userProfile?.orders?.length === 0 ? (
+                <div className="text-center py-10 text-red-500 text-base">
+                    No Orders Found!
+                </div>
+            ) : (
                 userProfile?.orders?.map((val, ind) => {
                     return <div className="min-h-60  p-6" key={ind}>
                         <div className="max-w-5xl mx-auto space-y-6">
@@ -87,8 +119,8 @@ function Profile() {
                                 {/* Order Header */}
                                 <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b pb-4 mb-4">
                                     <div>
-                                        <h2 className="text-xl font-bold text-gray-800">{val.id}</h2>
-                                        <p className="text-gray-500">Placed on: Aug 20, 2025</p>
+                                        <h2 className="text-xl font-bold text-gray-800">#{val.id}</h2>
+                                        <p className="text-gray-500">{val.date}</p>
                                     </div>
                                     <span className="mt-2 md:mt-0 px-4 py-1 text-sm font-medium rounded-full bg-green-100 text-green-700">
                                         Confirmed
@@ -133,20 +165,50 @@ function Profile() {
                                 </div>
 
                                 {/* Order Footer */}
-                                <div className="border-t mt-6 pt-4 flex justify-between font-bold text-gray-900 text-lg">
-                                    <span>Total</span>
-                                    <span>${val?.products?.reduce((acc, val) => {
+                                <div className="border-t mt-6 pt-4 flex justify-between ">
+                                    <span className='font-bold text-gray-900 text-xs'>Total After Taxes and Shipping Charge:</span>
+                                    <span className='font-bold text-gray-900 '>${val?.products?.reduce((acc, val) => {
                                         const itemsTotal = val.price * val.cartQty
                                         return (acc + itemsTotal + (itemsTotal * 0.10)) + 10
                                     }, 0).toFixed(2)}</span>
                                 </div>
+
+                                <div className='flex justify-center'>
+                                    <button className='bg-red-500 px-5 py-1 rounded text-white hover:bg-red-600 cursor-pointer mt-10' onClick={() => showConfirmation(val.id)}>Cancel</button>
+                                </div>
                             </div>
+
 
                         </div>
                     </div>
 
                 })
+            )
             }
+
+            {showModal && (
+                <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center w-80">
+                        <h2 className="text-base  mb-4">
+                            Are you sure you want to cancel the order?
+                        </h2>
+                        <div className="flex justify-center gap-4">
+                            <button
+                                onClick={() => CancelOrder(orderId)}
+                                className="bg-red-500 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-red-600"
+                            >
+                                Yes, Cancel
+                            </button>
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-400"
+                            >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
         </>
 
