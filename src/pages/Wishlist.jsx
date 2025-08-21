@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Reusables/navbar';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function Wishlist() {
@@ -79,11 +79,11 @@ function Wishlist() {
 
                                 {/* Image Section */}
                                 <div className="flex justify-center items-center w-full md:w-1/2">
-                                    <img
+                                    <Link to={`/induvidual/${val.id}`}> <img
                                         src={val.image}
                                         alt={val.model}
                                         className="w-50 rounded-xl shadow-md"
-                                    />
+                                    /></Link>
                                 </div>
 
                                 {/* Text Section */}

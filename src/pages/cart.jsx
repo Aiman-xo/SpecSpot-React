@@ -13,6 +13,10 @@ function Cart() {
     let nav = useNavigate()
     // let [count, setCount] = useState(0);
 
+    //shipping sharge
+
+    const shipping = 10;
+
 
 
     async function RemoveCartItem(removeInd, removedProduct) {
@@ -79,6 +83,15 @@ function Cart() {
         const resp = await axios.get(`http://localhost:3000/users/${userId}`);
         const data = resp.data;
     }
+
+    //printing total logic
+
+    const total = userDetail.cart.reduce((acc, val) => {
+        const itemTotal = val.price * val.cartQty;
+        return ((acc + itemTotal + (itemTotal * 0.10)))
+    }, 0);
+
+    const grandTotal = (total + shipping).toFixed(2);
 
     return (
 
@@ -180,7 +193,7 @@ function Cart() {
                 </div>
 
                 {/* ✅ Order Summary Section */}
-                <div className="w-full md:w-1/3  ">
+                {userDetail.cart.length !== 0 && <div className="w-full md:w-1/3  ">
                     <div className="max-w-md mx-auto md:mx-0 bg-white rounded-lg shadow-lg p-6 mt-6 md:mt-0  ">
                         <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 
@@ -211,7 +224,8 @@ function Cart() {
                         <div className="flex justify-between text-sm mb-2">
                             <span>Tax (10%)</span>
                             <span>{userDetail.cart.reduce((acc, val) => {
-                                return ((acc + val.price * val.cartQty) * 0.10)
+                                const itemTotal = val.price * val.cartQty;
+                                return (acc + (itemTotal * 0.10))
                             }, 0).toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between text-sm mb-2">
@@ -220,9 +234,7 @@ function Cart() {
                         </div>
                         <div className="flex justify-between font-bold text-lg">
                             <span>Total</span>
-                            <span>{userDetail.cart.reduce((acc, val) => {
-                                return (acc + (val.cartQty * val.price) + ((acc + val.price * val.cartQty) * 0.10))
-                            }, 0).toFixed(2)}</span>
+                            <span>{grandTotal}</span>
                         </div>
 
                         {/* Checkout Button */}
@@ -230,8 +242,11 @@ function Cart() {
                             Proceed to Checkout
                         </button>
                     </div>
-                </div>
+                </div>}
+
             </div>
+
+
         </div >
 
     )

@@ -8,7 +8,7 @@ import Products from "./pages/Products"
 import Cart from "./pages/cart"
 import Wishlist from "./pages/Wishlist"
 import Induvidual from "./featured/Induvidual"
-// import Orderpage from "./pages/orderpage";
+import Placedorders from "./pages/placedorders";
 import ShippingPage from "./pages/orderpage";
 import Profile from "./featured/profile"
 
@@ -41,6 +41,7 @@ function App() {
             <Route path="/induvidual/:id" element={<Induvidual />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/orders" element={<ShippingPage />}></Route>
+            <Route path="/orders/confirmed" element={<Placedorders />}></Route>
 
 
           </Routes>

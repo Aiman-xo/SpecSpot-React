@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 // import { RegisterContext } from './Rgister'
 import { useContext } from 'react'
 import { searchContext } from '../Context-API/context';
+import { toast } from 'react-toastify';
 
 function reducFun(prev, action) {
     switch (action.type) {
@@ -52,6 +53,14 @@ function Login() {
             setCred(data);
         }
         GetCred();
+    }, [])
+
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        if (userId) {
+            // toast.info('you are already logged In')
+            nav('/')
+        }
     }, [])
 
     let [state, dispatch] = useReducer(reducFun, { error: '' });

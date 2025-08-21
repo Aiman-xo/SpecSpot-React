@@ -42,7 +42,7 @@ function Navbar() {
         else {
             localStorage.removeItem("userId");
             toast.error('logging out...')
-            nav('/login')
+
         }
 
     }
@@ -173,6 +173,9 @@ function Navbar() {
                         </Link>
                         <Link to={'/products'} className="text-gray-700 hover:text-blue-600 hidden sm:inline-block">
                             Product
+                        </Link>
+                        <Link to={'/login'} className="text-gray-700 hover:text-blue-600 hidden sm:inline-block">
+                            Login
                         </Link>
                     </div>
 
