@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../Reusables/navbar'
 import { toast } from "react-toastify";
 // import { useContext } from 'react'
@@ -6,12 +6,14 @@ import { toast } from "react-toastify";
 import '../mystyle.css'
 import axios from 'axios'
 import { data, Link, useNavigate } from 'react-router-dom';
+import { searchContext } from '../Context-API/context';
 
 function Cart() {
     // let { addtocart, setAddtocart } = useContext(searchContext);
     let [userDetail, setuserDetails] = useState({ cart: [] });
     let nav = useNavigate()
     let [loading, setLoadaing] = useState(false);
+    let { setCartLength } = useContext(searchContext)
     // let [count, setCount] = useState(0);
 
     //shipping sharge
@@ -32,6 +34,7 @@ function Cart() {
         await axios.patch(`http://localhost:3000/users/${userId}`, {
             cart: filtered
         });
+        setCartLength(filtered.length)
 
 
 

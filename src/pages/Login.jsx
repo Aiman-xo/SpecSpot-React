@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { searchContext } from '../Context-API/context';
 import { toast } from 'react-toastify';
+import { X } from 'lucide-react';
 
 function reducFun(prev, action) {
     switch (action.type) {
@@ -64,7 +65,7 @@ function Login() {
     }, [])
 
     let [state, dispatch] = useReducer(reducFun, { error: '' });
-
+    console.log(cred);
     function Validate() {
         cred.map((val) => {
 
@@ -85,12 +86,21 @@ function Login() {
 
                     const user1 = cred.find((user) => user.email === state.email && user.password === state.pass);
                     // console.log(user1.id);
-                    if (user1) {
+                    if (user1.role === "user" && user1.status === "Active") {
                         localStorage.setItem("userId", user1.id);
+                        localStorage.setItem("role", user1.role)
                         setUser(user1.id);
+                        nav('/')
+                    } else if (user1.role === "admin") {
+                        localStorage.setItem("adminId", user1.id);
+                        localStorage.setItem("role", user1.role);
+
+                        nav('/admin')
+                    } else {
+                        toast.error('you are blocked by admin!!');
                     }
 
-                    nav('/')
+
                 }
             }
             else {
@@ -109,6 +119,12 @@ function Login() {
 
 
             <div className='bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md border border-gray-100'>
+                <div className='flex justify-end'>
+                    <button className='gap-2 px-2 py-1  bg-red-500 text-white rounded-lg hover:bg-red-600 transition cursor-pointer' onClick={() => nav('/')}>
+                        <X size={20} />
+                    </button>
+
+                </div>
 
                 <div className='text-center mb-6'>
                     <i><h1 className='text-3xl font-bold text-gray-400'><span className='font-[verdana]'>S</span>pec<span className='text-yellow-400 font-[verdana]'>S</span>pot</h1></i>

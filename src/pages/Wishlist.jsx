@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../Reusables/navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { searchContext } from '../Context-API/context';
 
 function Wishlist() {
 
@@ -11,6 +12,7 @@ function Wishlist() {
     const userId = localStorage.getItem("userId")
 
     let [wishlistItem, setWishlistItem] = useState([]);
+    const { setCartLength, setWishlistLength } = useContext(searchContext);
 
     useEffect(() => {
         async function wish() {
@@ -32,6 +34,7 @@ function Wishlist() {
             wishlist: filtered
         })
         setWishlistItem(filtered)
+        setWishlistLength(data.wishlist.length - 1)
         toast.error(`${Brand} removed from wishlist`)
     }
 
@@ -50,6 +53,7 @@ function Wishlist() {
             await axios.patch(`http://localhost:3000/users/${userId}`, {
                 cart: [...data.cart, Product]
             })
+            setCartLength(data.cart.length + 1);
             toast.success(`${brand} is added to you cart`)
         }
 

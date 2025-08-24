@@ -25,6 +25,7 @@ function Profile() {
 
     function LogOut() {
         localStorage.removeItem("userId");
+        localStorage.removeItem("role");
         // alert('loggin out....')
         toast.warning('logging out...')
         nav('/login')
@@ -145,7 +146,7 @@ function Profile() {
                                         <div className="space-y-4">
                                             {/* Item 1 */}
                                             {val?.products?.map((val) => {
-                                                return <div className="flex items-center gap-4  pb-4">
+                                                return <div className="flex items-center gap-4  pb-4" key={val.id}>
                                                     <img
                                                         src={val.image}
                                                         alt="product"

@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../Reusables/navbar';
 import { toast } from "react-toastify";
+import { searchContext } from '../Context-API/context';
 
 function Induvidual() {
     let { id } = useParams();
+    const { setCartLength } = useContext(searchContext);
     let [induvidual, setInduvidual] = useState([]);
     let [loading, setLoading] = useState(false);
     let nav = useNavigate();
@@ -36,6 +38,7 @@ function Induvidual() {
             await axios.patch(`http://localhost:3000/users/${userId}`, {
                 cart: [...data.cart, Product]
             })
+            setCartLength(data.cart.length + 1)
             toast.success(`${Product.brand} is added to you cart`)
         }
 
@@ -143,12 +146,17 @@ function Induvidual() {
 
                             {/* Buttons */}
                             <div className="flex gap-4">
-                                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)}>
+                                {induvidual.Productstatus === "Inactive" ? (<button className="bg-red-600  text-white px-6 py-2 rounded-lg shadow-md cursor-pointer cursor-not-allowed opacity-70 " onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)} disabled>
+                                    Product Not Avaliable
+                                </button>) : (<button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)}>
                                     Add to Cart
-                                </button>
-                                <button className="bg-green-600 text-white  px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => InduvidualBuy()}>
+                                </button>)}
+
+                                {induvidual.Productstatus === "Inactive" ? (null) : (<button className="bg-green-600 text-white  px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => InduvidualBuy()}>
                                     Buy Now
-                                </button>
+                                </button>)}
+
+
                             </div>
                         </div>
 

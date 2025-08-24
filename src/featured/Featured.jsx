@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { HeartIcon as HeartOutline } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 import '../mystyle.css'
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
+import { searchContext } from '../Context-API/context';
 
 function Featured() {
     let [data, setData] = useState([]);
     let navigate = useNavigate();
     let [wishlist1, setWishlist] = useState([]);
+    const { cartlength, setCartLength, setWishlistLength } = useContext(searchContext);
     // let {id}=useParams()
 
     // let [liked, setLiked] = useState({});
@@ -22,6 +24,7 @@ function Featured() {
         }
         products()
     }, [])
+
 
 
     //add to cart function
@@ -52,6 +55,7 @@ function Featured() {
                     cart: [...data.cart, val]
 
                 })
+                setCartLength(data.cart.length + 1)
 
             }
             // else {
@@ -115,6 +119,7 @@ function Featured() {
                 });
                 // alert(`${val.brand} is one of your liking`)
                 setWishlist(updatedWishlist);
+                setWishlistLength(data.wishlist.length + 1)
 
             }
 
@@ -135,6 +140,7 @@ function Featured() {
                 wishlist: newFiltered
             })
             setWishlist(newFiltered)
+            setWishlistLength(data.wishlist.length - 1)
 
             // alert(`${val.brand} removed from wishlist`)
         }
@@ -156,10 +162,15 @@ function Featured() {
                         </div>
                         <div className='flex justify-start ms-5'>
                             <div >
-                                <p className='font-bold text-xl mb-3 mt-1'>{val.brand}</p>
+                                <div className='flex justify-between'><p className='font-bold text-xl '>{val.brand}</p><p className={` text-xs h-5 mt-2 rounded-sm me-1 px-1  font-medium ${val.Productstatus === "Active"
+                                    ? "bg-green-100 text-green-600"
+                                    : "bg-red-100 text-red-600"
+                                    }`}>{val.Productstatus}</p></div>
+
                                 <p className='mb-1'>{val.model}</p>
                                 <p className='text-green-500 '>{val.price}</p>
-                                <button className='bg-yellow-500 px-3 py-1 rounded text-xs cursor-pointer hover:bg-yellow-400' onClick={() => AddtoCart(val, val.id)}>Add to cart</button>
+                                {val.Productstatus === "Inactive" ? (<button className='bg-red-500 px-3 py-1 rounded text-xs cursor-pointer  cursor-not-allowed opacity-60' disabled>Inactive</button>) : (<button className='bg-yellow-500 px-3 py-1 rounded text-xs cursor-pointer hover:bg-yellow-400' onClick={() => AddtoCart(val, val.id)}>Add to cart</button>)}
+
                                 <button
                                     onClick={() => wishlist(val, val.id)}
                                     className="p-2 rounded-full hover:bg-gray-100 transition ms-13 cursor-pointer"

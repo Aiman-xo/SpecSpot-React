@@ -10,24 +10,29 @@ import { toast } from 'react-toastify';
 
 function Navbar() {
     let [isMenuOpen, setIsMenuOpen] = useState(false);
-    let { search, setSearch, setFocus, focus } = useContext(searchContext);
-    let [cartlength, setCartlength] = useState([]);
-    let [wishlength, setWishLength] = useState([]);
+    let { search, setSearch, setFocus, focus, flag, cartlength, setCartLength, wishlistLength, setWishlistLength } = useContext(searchContext);
+    // let [cartlength, setCartlength] = useState([]);
+    // let [wishlength, setWishLength] = useState([]);
     let [products, setProducts] = useState([]);
     let [details, setDetails] = useState([]);
+    let [showlogin, setShowLogin] = useState(false);
+
     let [notfound, setNotfound] = useState('');
     let nav = useNavigate();
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
         if (!userId) {
+            setShowLogin(true);
             return
         }
         async function getCartLength() {
             const resp = await axios.get(`http://localhost:3000/users/${userId}`);
             const data = resp.data;
-            setCartlength(data.cart);
-            setWishLength(data.wishlist);
+            setCartLength(data.cart.length)
+            setWishlistLength(data.wishlist.length)
+            // setCartlength(data.cart);
+            // setWishLength(data.wishlist);
         }
         getCartLength()
     })
@@ -41,7 +46,11 @@ function Navbar() {
         }
         else {
             localStorage.removeItem("userId");
+            localStorage.removeItem("role");
             toast.error('logging out...')
+            nav('/')
+            setCartLength(0);
+            setWishlistLength(0);
 
         }
 
@@ -174,9 +183,9 @@ function Navbar() {
                         <Link to={'/products'} className="text-gray-700 hover:text-blue-600 hidden sm:inline-block">
                             Product
                         </Link>
-                        <Link to={'/login'} className="text-gray-700 hover:text-blue-600 hidden sm:inline-block">
+                        {showlogin && <Link to={'/login'} className="text-gray-700 hover:bg-green-600 hidden sm:inline-block bg-green-500 rounded px-3 py-1 text-white">
                             Login
-                        </Link>
+                        </Link>}
                     </div>
 
 
@@ -222,7 +231,7 @@ function Navbar() {
                                 />
                             </svg>
                             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                {wishlength.length}
+                                {wishlistLength}
                             </span>
                         </button>
 
@@ -243,7 +252,7 @@ function Navbar() {
                                 />
                             </svg>
                             <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                {cartlength.length}
+                                {cartlength}
                             </span>
                         </button>
 
@@ -300,6 +309,9 @@ function Navbar() {
                         <Link to="/profile" className="block py-2 text-gray-700 hover:text-blue-600">
                             Profile
                         </Link>
+                        {showlogin && <Link to="/login" className="block py-2 text-gray-700 hover:text-blue-600">
+                            Login
+                        </Link>}
                         {/* Logout in Mobile Menu */}
                         <button className="block py-2 text-red-700 hover:text-blue-600" onClick={LogOut}>
                             Logout
@@ -309,7 +321,7 @@ function Navbar() {
 
 
             </nav>
-            <div className='absolute bg-gray-200 text-black fixed  left-33 sm:left-90 w-35 sm:w-80 rounded'>
+            <div className='absolute bg-gray-200 text-black fixed z-999 left-33 sm:left-90 w-35 sm:w-80 rounded'>
                 {focus && search.length > 0 &&
                     details.map((val) => {
                         return <Link to={`/induvidual/${val.id}`} onClick={() => {

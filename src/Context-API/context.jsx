@@ -7,6 +7,10 @@ function Context({ children }) {
     let [search, setSearch] = useState("");
     let [user, setUser] = useState('');
     let [focus, setFocus] = useState(false);
+    let [cartlength, setCartLength] = useState(0);
+    let [wishlistLength, setWishlistLength] = useState(0);
+    let [flag, setFlag] = useState(false);
+
     // let [addtocart, setAddtocart] = useState(JSON.parse(localStorage.getItem("cartValue") || []));
 
 
@@ -26,7 +30,7 @@ function Context({ children }) {
     // console.log('USER', user)
     return (
         <div>
-            <searchContext.Provider value={{ search, setSearch, user, setUser, focus, setFocus }}>
+            <searchContext.Provider value={{ search, setSearch, user, setUser, focus, setFocus, flag, setFlag, cartlength, setCartLength, wishlistLength, setWishlistLength }}>
                 {children}
             </searchContext.Provider>
         </div>
