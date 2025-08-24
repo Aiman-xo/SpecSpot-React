@@ -1,15 +1,20 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Pencil, Trash, Check, X, Plus } from 'lucide-react';
 import FormModal from '../Modals/FormModal';
+import { adminContext } from '../../Context-API/adminContext';
+import EditFormModal from '../Modals/EditFormModal';
 
 
 function ManageProducts() {
-    let [products, setProducts] = useState([]);
+    // let [products, setProducts] = useState([]);
+    const { setProducts, products } = useContext(adminContext);
     let [searchValue, setSearchValue] = useState("");
     let [notfound, setNotfound] = useState('');
     let [flag, setFlag] = useState(false);
     let [form, setForm] = useState(false);
+    let [selectEdit, setSelectEdit] = useState(null);
+    let [editform, setEditForm] = useState(false);
     useEffect(() => {
         async function GetProducts() {
             const resp = await axios.get("http://localhost:3000/products");
@@ -45,7 +50,7 @@ function ManageProducts() {
 
 
         await axios.patch(`http://localhost:3000/products/${ProductId}`, {
-            Productstatus: "Inactive"
+            Productstatus: "out-of-stock"
         })
         setFlag(pre => !pre)
 
@@ -56,14 +61,32 @@ function ManageProducts() {
 
 
         await axios.patch(`http://localhost:3000/products/${ProductId}`, {
-            Productstatus: "Active"
+            Productstatus: "available"
         })
         setFlag(pre => !pre)
 
     }
+
+    async function DeleteProduct(ProductId) {
+        await axios.get(`http://localhost:3000/products/${ProductId}`);
+
+
+        await axios.delete(`http://localhost:3000/products/${ProductId}`)
+        setFlag(pre => !pre)
+
+    }
+
+
+    function FormEditing(productObject) {
+        setSelectEdit(productObject);
+        setEditForm(true);
+
+    }
+    // console.log(selectEdit);
     return (
         <div>
-            {form && <FormModal prop={setForm} />}
+            {form && <FormModal onClose={setForm} />}
+            {editform && <EditFormModal onClose={setEditForm} EditProduct={selectEdit} />}
             <div className="flex justify-center items-center gap-4 mb-6">
                 <input
                     type="text"
@@ -87,7 +110,7 @@ function ManageProducts() {
                             <th className="px-6 py-3 text-left text-sm font-semibold">#ID</th>
                             <th className="px-6 py-3 text-left text-sm font-semibold">Name</th>
                             <th className="px-6 py-3 text-left text-sm font-semibold">Image</th>
-                            <th className="px-6 py-3 text-left text-sm font-semibold">Category</th>
+                            <th className="px-6 py-3 text-left text-sm font-semibold">Type</th>
                             <th className="px-6 py-3 text-left text-sm font-semibold">Price ($)</th>
                             <th className="px-6 py-3 text-left text-sm font-semibold">Stock</th>
                             <th className="px-6 py-3 text-left text-sm font-semibold">Status</th>
@@ -109,7 +132,7 @@ function ManageProducts() {
                                 <td className="px-6 py-4 text-sm text-gray-500">{product.quantity}</td>
                                 <td className="px-6 py-4">
                                     <span
-                                        className={`px-2 py-1 rounded-full text-xs font-medium ${product.Productstatus === "Active"
+                                        className={`px-2 py-1 rounded-full text-xs font-medium ${product.Productstatus === "available"
                                             ? "bg-green-100 text-green-600"
                                             : "bg-red-100 text-red-600"
                                             }`}
@@ -120,19 +143,19 @@ function ManageProducts() {
                                 <td className="px-6 py-4 text-center">
                                     <div className="flex gap-2">
 
-                                        <button className="flex-1 flex items-center justify-center gap-1 px-3 md:py-1 md:px-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 transition text-sm cursor-pointer">
+                                        <button className="flex-1 flex items-center justify-center gap-1 px-3 md:py-1 md:px-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 transition text-sm cursor-pointer" onClick={() => FormEditing(product)}>
                                             <Pencil size={16} />
 
                                         </button>
 
-                                        <button className="flex-1 flex items-center justify-center gap-1  px-3 py-2 md:px-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm cursor-pointer">
+                                        <button className="flex-1 flex items-center justify-center gap-1  px-3 py-2 md:px-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm cursor-pointer" onClick={() => DeleteProduct(product.id)}>
                                             <Trash size={16} />
 
                                         </button>
 
 
 
-                                        {product.Productstatus === "Active" ? (
+                                        {product.Productstatus === "available" ? (
                                             <button className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white rounded-lg hover:bg-red-600 transition text-sm cursor-pointer " onClick={() => StatusInactive(product.id)}>
                                                 <X size={16} />
 

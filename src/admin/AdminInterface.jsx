@@ -1,13 +1,15 @@
 import React from 'react'
 import { useState } from 'react';
 import AdminSidebar from './sidebar/sidebar';
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 function AdminInterface() {
+    // let nav = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const admin = localStorage.getItem("adminId");
     console.log(admin);
+
     return (
         <div className="flex min-h-screen">
             {/* Sidebar */}

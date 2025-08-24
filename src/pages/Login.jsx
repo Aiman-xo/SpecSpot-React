@@ -88,7 +88,8 @@ function Login() {
                     // console.log(user1.id);
                     if (user1.role === "user" && user1.status === "Active") {
                         localStorage.setItem("userId", user1.id);
-                        localStorage.setItem("role", user1.role)
+                        localStorage.setItem("role", user1.role);
+
                         setUser(user1.id);
                         nav('/')
                     } else if (user1.role === "admin") {

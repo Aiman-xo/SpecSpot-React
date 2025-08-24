@@ -241,7 +241,87 @@ function Products() {
             <div className='flex justify-start'>
                 <h4 className='ms-6 mt-6  text-base font-[verdana] text-gray-900'>Find the product you love:</h4>
             </div>
-            <div className='grid grid-cols-2 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto mt-4 '>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto mt-6">
+                {details.map((val) => {
+                    const isLiked = wishlist1.some((item) => item.id === val.id);
+
+                    return (
+                        <div
+                            key={val.id}
+                            className="bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
+                        >
+                            {/* Image */}
+                            <div className="relative flex justify-center bg-gray-50 p-4">
+                                <Link to={`/induvidual/${val.id}`}>
+                                    <img
+                                        src={val.image}
+                                        alt={val.model}
+                                        className="w-36 h-36 object-contain"
+                                    />
+                                </Link>
+
+                                {/* Wishlist button top-right */}
+                                <button
+                                    onClick={() => wishlist(val, val.id)}
+                                    className="absolute top-3 right-3 p-2 rounded-full bg-white shadow hover:bg-gray-100 transition cursor-pointer"
+                                >
+                                    {isLiked ? (
+                                        <HeartSolid className="h-5 w-5 text-red-500" />
+                                    ) : (
+                                        <HeartOutline className="h-5 w-5 text-gray-500" />
+                                    )}
+                                </button>
+                            </div>
+
+                            {/* Content */}
+                            <div className="px-4 py-3 flex flex-col flex-grow">
+                                {/* Brand + Status */}
+                                <div className="flex justify-between items-center mb-1">
+                                    <p className="font-bold text-lg">{val.brand}</p>
+                                    <span
+                                        className={`text-xs px-2 py-0.5 rounded ${val.Productstatus === "available"
+                                            ? "bg-green-100 text-green-600"
+                                            : "bg-red-100 text-red-600"
+                                            }`}
+                                    >
+                                        {val.Productstatus}
+                                    </span>
+                                </div>
+
+                                {/* Model */}
+                                <p className="text-gray-600 text-sm mb-2">{val.model}</p>
+
+                                {/* Price */}
+                                <p className="text-green-600 font-semibold mb-3">${val.price}</p>
+
+                                {/* Action buttons */}
+                                <div className="mt-auto">
+                                    {val.Productstatus === "out-of-stock" ? (
+                                        <button
+                                            className="w-full bg-red-500 text-white px-3 py-2 rounded-lg text-sm cursor-not-allowed opacity-70"
+                                            disabled
+                                        >
+                                            out-of-stock
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className="w-full bg-yellow-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-yellow-400 transition cursor-pointer"
+                                            onClick={() => AddtoCart(val, val.id)}
+                                        >
+                                            Add to cart
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+
+
+            {/* <div className='grid grid-cols-2 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto mt-4 '>
 
                 {
                     details.map((val) => {
@@ -285,7 +365,7 @@ function Products() {
                     })
                 }
 
-            </div>
+            </div> */}
 
 
             <div className='w-auto h-60 flex  items-center justify-center text-[17px] font-[verdana] text-red-400'>

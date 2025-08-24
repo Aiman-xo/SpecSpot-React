@@ -146,13 +146,13 @@ function Induvidual() {
 
                             {/* Buttons */}
                             <div className="flex gap-4">
-                                {induvidual.Productstatus === "Inactive" ? (<button className="bg-red-600  text-white px-6 py-2 rounded-lg shadow-md cursor-pointer cursor-not-allowed opacity-70 " onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)} disabled>
+                                {induvidual.Productstatus === "out-of-stock" ? (<button className="bg-red-600  text-white px-6 py-2 rounded-lg shadow-md cursor-pointer cursor-not-allowed opacity-70 " onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)} disabled>
                                     Product Not Avaliable
                                 </button>) : (<button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md cursor-pointer" onClick={() => AddtoCart(induvidual, induvidual.id, induvidual.brand)}>
                                     Add to Cart
                                 </button>)}
 
-                                {induvidual.Productstatus === "Inactive" ? (null) : (<button className="bg-green-600 text-white  px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => InduvidualBuy()}>
+                                {induvidual.Productstatus === "out-of-stock" ? (null) : (<button className="bg-green-600 text-white  px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer" onClick={() => InduvidualBuy()}>
                                     Buy Now
                                 </button>)}
 

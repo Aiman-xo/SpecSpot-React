@@ -148,48 +148,127 @@ function Featured() {
 
     }
     return (
-        <div className='grid grid-cols-2 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mt-4 '>
+        // <div className='grid grid-cols-2 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mt-4 '>
 
 
 
 
-            {
-                data.slice(0, 4).map((val) => {
-                    const isLiked = wishlist1.some(item => item.id === val.id);
-                    return <div className='card ' key={val.id}>
-                        <div className='flex justify-center'>
-                            <Link to={`/induvidual/${val.id}`}><img src={val.image} alt="" className='w-40 mt-3' /></Link>
+        //     {
+        //         data.slice(0, 4).map((val) => {
+        //             const isLiked = wishlist1.some(item => item.id === val.id);
+        //             return <div className='card ' key={val.id}>
+        //                 <div className='flex justify-center'>
+        //                     <Link to={`/induvidual/${val.id}`}><img src={val.image} alt="" className='w-40 mt-3' /></Link>
+        //                 </div>
+        //                 <div className='flex justify-start ms-5'>
+        //                     <div >
+        //                         <div className='flex justify-between'><p className='font-bold text-xl '>{val.brand}</p><p className={` text-xs h-5 mt-2 rounded-sm me-1 px-1  font-medium ${val.Productstatus === "Active"
+        //                             ? "bg-green-100 text-green-600"
+        //                             : "bg-red-100 text-red-600"
+        //                             }`}>{val.Productstatus}</p></div>
+
+        //                         <p className='mb-1'>{val.model}</p>
+        //                         <p className='text-green-500 '>{val.price}</p>
+        //                         {val.Productstatus === "Inactive" ? (<button className='bg-red-500 px-3 py-1 rounded text-xs cursor-pointer  cursor-not-allowed opacity-60' disabled>Inactive</button>) : (<button className='bg-yellow-500 px-3 py-1 rounded text-xs cursor-pointer hover:bg-yellow-400' onClick={() => AddtoCart(val, val.id)}>Add to cart</button>)}
+
+        //                         <button
+        //                             onClick={() => wishlist(val, val.id)}
+        //                             className="p-2 rounded-full hover:bg-gray-100 transition ms-13 cursor-pointer"
+        //                         >
+        //                             {isLiked ? (
+        //                                 <HeartSolid className="h-6 w-6 text-red-500" />
+        //                             ) : (
+        //                                 <HeartOutline className="h-6 w-6 text-gray-500" />
+        //                             )}
+        //                         </button>
+
+        //                     </div>
+        //                 </div>
+
+        //             </div>
+        //         })
+        //     }
+
+        // </div>
+
+
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mt-6">
+            {data.slice(0, 4).map((val) => {
+                const isLiked = wishlist1.some((item) => item.id === val.id);
+
+                return (
+                    <div
+                        key={val.id}
+                        className="bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
+                    >
+                        {/* Product Image */}
+                        <div className="relative flex justify-center bg-gray-50 p-4">
+                            <Link to={`/induvidual/${val.id}`}>
+                                <img
+                                    src={val.image}
+                                    alt={val.model}
+                                    className="w-32 h-32 object-contain"
+                                />
+                            </Link>
+
+                            {/* Wishlist Button */}
+                            <button
+                                onClick={() => wishlist(val, val.id)}
+                                className="absolute top-3 right-3 p-2 rounded-full bg-white shadow hover:bg-gray-100 transition cursor-pointer"
+                            >
+                                {isLiked ? (
+                                    <HeartSolid className="h-5 w-5 text-red-500" />
+                                ) : (
+                                    <HeartOutline className="h-5 w-5 text-gray-500" />
+                                )}
+                            </button>
                         </div>
-                        <div className='flex justify-start ms-5'>
-                            <div >
-                                <div className='flex justify-between'><p className='font-bold text-xl '>{val.brand}</p><p className={` text-xs h-5 mt-2 rounded-sm me-1 px-1  font-medium ${val.Productstatus === "Active"
-                                    ? "bg-green-100 text-green-600"
-                                    : "bg-red-100 text-red-600"
-                                    }`}>{val.Productstatus}</p></div>
 
-                                <p className='mb-1'>{val.model}</p>
-                                <p className='text-green-500 '>{val.price}</p>
-                                {val.Productstatus === "Inactive" ? (<button className='bg-red-500 px-3 py-1 rounded text-xs cursor-pointer  cursor-not-allowed opacity-60' disabled>Inactive</button>) : (<button className='bg-yellow-500 px-3 py-1 rounded text-xs cursor-pointer hover:bg-yellow-400' onClick={() => AddtoCart(val, val.id)}>Add to cart</button>)}
-
-                                <button
-                                    onClick={() => wishlist(val, val.id)}
-                                    className="p-2 rounded-full hover:bg-gray-100 transition ms-13 cursor-pointer"
+                        {/* Product Content */}
+                        <div className="px-4 py-3 flex flex-col flex-grow">
+                            {/* Brand + Status */}
+                            <div className="flex justify-between items-center mb-1">
+                                <p className="font-bold text-lg">{val.brand}</p>
+                                <span
+                                    className={`text-xs px-2 py-0.5 rounded ${val.Productstatus === "available"
+                                        ? "bg-green-100 text-green-600"
+                                        : "bg-red-100 text-red-600"
+                                        }`}
                                 >
-                                    {isLiked ? (
-                                        <HeartSolid className="h-6 w-6 text-red-500" />
-                                    ) : (
-                                        <HeartOutline className="h-6 w-6 text-gray-500" />
-                                    )}
-                                </button>
+                                    {val.Productstatus}
+                                </span>
+                            </div>
 
+                            {/* Model */}
+                            <p className="text-gray-600 text-sm mb-2">{val.model}</p>
+
+                            {/* Price */}
+                            <p className="text-green-600 font-semibold mb-3">${val.price}</p>
+
+                            {/* Action Buttons */}
+                            <div className="mt-auto">
+                                {val.Productstatus === "out-of-stock" ? (
+                                    <button
+                                        className="w-full bg-red-500 text-white px-3 py-2 rounded-lg text-sm cursor-not-allowed opacity-60"
+                                        disabled
+                                    >
+                                        out-of-stock
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="w-full bg-yellow-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-yellow-400 transition cursor-pointer"
+                                        onClick={() => AddtoCart(val, val.id)}
+                                    >
+                                        Add to cart
+                                    </button>
+                                )}
                             </div>
                         </div>
-
                     </div>
-                })
-            }
-
+                );
+            })}
         </div>
+
     )
 }
 
