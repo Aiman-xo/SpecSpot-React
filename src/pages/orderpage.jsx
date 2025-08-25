@@ -94,6 +94,7 @@ function ShippingPage() {
                 orders: [...data.orders, {
                     id: idNo,
                     products: productsToSave,
+                    orderStatus: "pending",
                     date: new Date().toLocaleString("en-US", {
                         year: "numeric",
                         month: "short",
@@ -331,10 +332,10 @@ function ShippingPage() {
                                     type: 'get-country',
                                     payLoad: e.target.value
                                 })}>
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>United Kingdom</option>
-                                    <option>Australia</option>
+                                    <option value={'united states'}>United States</option>
+                                    <option value={'canada'}>Canada</option>
+                                    <option value={'united Kingom'}>United Kingdom</option>
+                                    <option value={'australia'}>Australia</option>
                                 </select>
                             </div>
                         </div>

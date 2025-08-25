@@ -89,12 +89,14 @@ function Login() {
                     if (user1.role === "user" && user1.status === "Active") {
                         localStorage.setItem("userId", user1.id);
                         localStorage.setItem("role", user1.role);
+                        localStorage.setItem("status", user1.status)
 
                         setUser(user1.id);
                         nav('/')
                     } else if (user1.role === "admin") {
                         localStorage.setItem("adminId", user1.id);
                         localStorage.setItem("role", user1.role);
+
 
                         nav('/admin')
                     } else {

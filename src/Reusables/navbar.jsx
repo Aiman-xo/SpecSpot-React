@@ -126,6 +126,15 @@ function Navbar() {
 
     }, [search])
 
+    function checkAdmin() {
+        const adminId = localStorage.getItem("adminId");
+        if (adminId) {
+            nav('/admin')
+        } else {
+            nav('/login')
+        }
+    }
+
 
     return (
 
@@ -183,9 +192,9 @@ function Navbar() {
                         <Link to={'/products'} className="text-gray-700 hover:text-blue-600 hidden sm:inline-block">
                             Product
                         </Link>
-                        {showlogin && <Link to={'/login'} className="text-gray-700 hover:bg-green-600 hidden sm:inline-block bg-green-500 rounded px-3 py-1 text-white">
+                        {showlogin && <button onClick={() => checkAdmin()} className="text-gray-700 hover:bg-green-600 hidden sm:inline-block bg-green-500 rounded px-3 py-1 text-white cursor-pointer">
                             Login
-                        </Link>}
+                        </button>}
                     </div>
 
 

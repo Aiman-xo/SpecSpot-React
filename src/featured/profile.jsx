@@ -123,9 +123,8 @@ function Profile() {
                                         <h2 className="text-xl font-bold text-gray-800">#{val.id}</h2>
                                         <p className="text-gray-500">{val.date}</p>
                                     </div>
-                                    <span className="mt-2 md:mt-0 px-4 py-1 text-sm font-medium rounded-full bg-green-100 text-green-700">
-                                        Confirmed
-                                    </span>
+                                    <span className={`mt-2 inline-block px-3 py-2 rounded-full text-sm font-medium w-20 text-center ${val.orderStatus === "pending" ? "bg-yellow-100 text-yellow-700" : val.orderStatus === "shipped" ? "bg-blue-100 text-blue-700" :
+                                        val.orderStatus === "delivered" ? "bg-green-100 text-green-700" : val.orderStatus === "cancelled" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"}`}>{val.orderStatus}</span>
                                 </div>
 
                                 {/* Flex Layout: Shipping + Items */}
@@ -138,6 +137,7 @@ function Profile() {
                                         <p className="text-gray-600">{val.shipping.phone}</p>
                                         <p className="text-gray-600">{val.shipping.city}</p>
                                         <p className="text-gray-600">{val.shipping.pin}</p>
+                                        <p className="text-gray-600">{val.shipping.country}</p>
                                     </div>
 
                                     {/* Ordered Items */}

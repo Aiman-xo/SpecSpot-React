@@ -15,6 +15,8 @@ function ManageProducts() {
     let [form, setForm] = useState(false);
     let [selectEdit, setSelectEdit] = useState(null);
     let [editform, setEditForm] = useState(false);
+    let [showDeleteModal, setshowDeleteModal] = useState(false);
+    let [deleteId, setDeleteId] = useState();
     useEffect(() => {
         async function GetProducts() {
             const resp = await axios.get("http://localhost:3000/products");
@@ -68,6 +70,7 @@ function ManageProducts() {
     }
 
     async function DeleteProduct(ProductId) {
+        setshowDeleteModal(false)
         await axios.get(`http://localhost:3000/products/${ProductId}`);
 
 
@@ -81,6 +84,11 @@ function ManageProducts() {
         setSelectEdit(productObject);
         setEditForm(true);
 
+    }
+
+    function DeleteConfirmation(deleteId) {
+        setshowDeleteModal(true);
+        setDeleteId(deleteId);
     }
     // console.log(selectEdit);
     return (
@@ -148,7 +156,7 @@ function ManageProducts() {
 
                                         </button>
 
-                                        <button className="flex-1 flex items-center justify-center gap-1  px-3 py-2 md:px-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm cursor-pointer" onClick={() => DeleteProduct(product.id)}>
+                                        <button className="flex-1 flex items-center justify-center gap-1  px-3 py-2 md:px-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm cursor-pointer" onClick={() => DeleteConfirmation(product.id)}>
                                             <Trash size={16} />
 
                                         </button>
@@ -181,6 +189,30 @@ function ManageProducts() {
             <div className='flex justify-center mt-10 text-red-500 text-xl'>
                 <p>{notfound}</p>
             </div>
+
+            {showDeleteModal && (
+                <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center w-80">
+                        <h2 className="text-base  mb-4">
+                            Are you sure you want to delete the product?
+                        </h2>
+                        <div className="flex justify-center gap-4">
+                            <button
+                                onClick={() => DeleteProduct(deleteId)}
+                                className="bg-red-500 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-red-600"
+                            >
+                                Yes, Delete
+                            </button>
+                            <button
+                                onClick={() => setshowDeleteModal(false)}
+                                className="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-400"
+                            >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
         </div>
     )

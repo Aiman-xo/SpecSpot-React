@@ -8,6 +8,9 @@ function Users() {
     let [searchValue, setSearchValue] = useState("");
     let [notfound, setNotfound] = useState('');
     let [sortStatus, setSortStatus] = useState('all');
+    const [showBlockModal, setShowBlockModal] = useState(false);
+    const [showUnblockModal, setShowunBlockModal] = useState(false);
+    let [userId, setUserId] = useState();
 
     // useEffect(() => {
     //     async function GetUsers() {
@@ -56,7 +59,7 @@ function Users() {
 
     async function SetBlock(userId) {
 
-
+        setShowBlockModal(false)
         // const Activate = setstatus === "Active" ? "Inactive" : "Active"
 
         await axios.patch(`http://localhost:3000/users/${userId}`, {
@@ -66,13 +69,25 @@ function Users() {
     }
 
     async function Unblock(userId) {
-
+        setShowunBlockModal(false);
         // const Activate = setstatus === "Active" ? "Inactive" : "Active"
 
         await axios.patch(`http://localhost:3000/users/${userId}`, {
             status: "Active"
         })
         setFlag(pre => !pre)
+    }
+
+    function ShowConfirmationBlock(userId) {
+        setShowBlockModal(true);
+        setUserId(userId)
+
+    }
+
+    function ShowConfirmationunBlock(userId) {
+        setShowunBlockModal(true);
+        setUserId(userId)
+
     }
 
     return (
@@ -138,11 +153,11 @@ function Users() {
                                 </td>
                                 <td className="px-6 py-4 text-center">
                                     {user.status === "Active" ? (
-                                        <button className="flex items-center gap-1 px-3 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm cursor-pointer" onClick={() => SetBlock(user.id)}>
+                                        <button className="flex items-center gap-1 px-3 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm cursor-pointer" onClick={() => ShowConfirmationBlock(user.id)}>
                                             <Lock size={16} /> Block
                                         </button>
                                     ) : (
-                                        <button className="flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-lg hover:bg-green-600 transition text-sm cursor-pointer" onClick={() => Unblock(user.id)}>
+                                        <button className="flex items-center gap-1 px-3 py-1.5 bg-green-500 text-white rounded-lg hover:bg-green-600 transition text-sm cursor-pointer" onClick={() => ShowConfirmationunBlock(user.id)}>
                                             <Unlock size={16} /> Unblock
                                         </button>
                                     )}
@@ -157,6 +172,55 @@ function Users() {
             <div className=' flex items-center justify-center text-red-700 mt-10'>
                 <div>{notfound}</div>
             </div>
+
+            {showBlockModal && (
+                <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center w-80">
+                        <h2 className="text-base  mb-4">
+                            Are you sure you want to Block the user?
+                        </h2>
+                        <div className="flex justify-center gap-4">
+                            <button
+                                onClick={() => SetBlock(userId)}
+                                className="bg-red-500 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-red-600"
+                            >
+                                Yes, Block
+                            </button>
+                            <button
+                                onClick={() => setShowBlockModal(false)}
+                                className="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-400"
+                            >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+            {showUnblockModal && (
+                <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center w-80">
+                        <h2 className="text-base  mb-4">
+                            Are you sure you want to Unblock the user?
+                        </h2>
+                        <div className="flex justify-center gap-4">
+                            <button
+                                onClick={() => Unblock(userId)}
+                                className="bg-green-500 text-white px-4 py-1 rounded-lg cursor-pointer hover:bg-green-600"
+                            >
+                                Yes, Unblock
+                            </button>
+                            <button
+                                onClick={() => setShowunBlockModal(false)}
+                                className="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-400"
+                            >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
