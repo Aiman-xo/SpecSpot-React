@@ -11,23 +11,16 @@ function Users() {
     const [showBlockModal, setShowBlockModal] = useState(false);
     const [showUnblockModal, setShowunBlockModal] = useState(false);
     let [userId, setUserId] = useState();
+    let [state, setState] = useState([]);
 
-    // useEffect(() => {
-    //     async function GetUsers() {
-    //         const resp = await axios.get('http://localhost:3000/users');
-    //         const data = await resp.data;
-    //         setUsers(data);
-
-
-    //     }
-
-    //     GetUsers()
-    // }, [flag])
-
+    //show number of blocked users
+    const BolckedUsers = state.filter((val) => val.status === "Inactive");
+    console.log(BolckedUsers.length);
     useEffect(() => {
         async function GetUsers() {
             const resp = await axios.get('http://localhost:3000/users');
             const data = await resp.data;
+            setState(data)
 
             let filtered = data;
 

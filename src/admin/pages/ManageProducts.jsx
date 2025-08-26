@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react'
-import { Pencil, Trash, Check, X, Plus } from 'lucide-react';
+import { Pencil, Trash, Check, X, Plus, Package } from 'lucide-react';
 import FormModal from '../Modals/FormModal';
 import { adminContext } from '../../Context-API/adminContext';
 import EditFormModal from '../Modals/EditFormModal';
+import { toast } from 'react-toastify';
 
 
 function ManageProducts() {
@@ -17,11 +18,13 @@ function ManageProducts() {
     let [editform, setEditForm] = useState(false);
     let [showDeleteModal, setshowDeleteModal] = useState(false);
     let [deleteId, setDeleteId] = useState();
+    let [numTotalProducts, setNumTotalProducts] = useState(0);
     useEffect(() => {
         async function GetProducts() {
             const resp = await axios.get("http://localhost:3000/products");
             const data = resp.data;
             setProducts(data);
+            setNumTotalProducts(data.length);
 
             setNotfound('');
             if (searchValue.trim() !== '') {
@@ -76,6 +79,7 @@ function ManageProducts() {
 
         await axios.delete(`http://localhost:3000/products/${ProductId}`)
         setFlag(pre => !pre)
+        toast.error('Product Deleted');
 
     }
 
@@ -89,13 +93,32 @@ function ManageProducts() {
     function DeleteConfirmation(deleteId) {
         setshowDeleteModal(true);
         setDeleteId(deleteId);
+
     }
     // console.log(selectEdit);
     return (
-        <div>
+        <div className='bg-gray-100 p-15 rounded-xl'>
             {form && <FormModal onClose={setForm} />}
             {editform && <EditFormModal onClose={setEditForm} EditProduct={selectEdit} />}
-            <div className="flex justify-center items-center gap-4 mb-6">
+
+            <div className="mb-8">
+                <h1 className="text-3xl font-bold text-gray-900">Products List</h1>
+                <p className="text-gray-500 mt-1">Welcome back! What's the New Change.</p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-sm p-6 mb-20">
+                <div className="flex items-center justify-between">
+                    <div className="p-3 bg-purple-500 rounded-full">
+                        <Package className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                        <p className="text-gray-500 text-sm">Total Products</p>
+                        <h3 className="text-2xl font-bold text-gray-900 mt-2">{numTotalProducts}</h3>
+                    </div>
+
+                </div>
+            </div>
+            <div className="flex justify-center items-center gap-4 mb-6 bg-gray-100 p-10">
                 <input
                     type="text"
                     placeholder="Search..."

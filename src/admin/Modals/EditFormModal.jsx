@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { adminContext } from '../../Context-API/adminContext';
+import { toast } from 'react-toastify';
 function EditFormModal({ onClose, EditProduct }) {
     let { setProducts } = useContext(adminContext);
     console.log(EditProduct);
@@ -42,6 +43,7 @@ function EditFormModal({ onClose, EditProduct }) {
             return val.id === resp.data.id ? resp.data : val
         }))
         onClose(false);
+        toast.warning('product edited');
     }
 
 

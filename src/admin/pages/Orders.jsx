@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Eye, Edit, Trash2, Package, Truck, CheckCircle, XCircle, Clock } from "lucide-react";
 import axios from 'axios';
 import OrderDetails from '../Modals/OrderDetails';
+import { adminContext } from '../../Context-API/adminContext';
 
 function Orders() {
     let [orders, setOrders] = useState([]);
@@ -11,6 +12,7 @@ function Orders() {
     let [filterStatus, setFilterStatus] = useState('');
     let [filterOrders1, setFilterOrders] = useState([]);
     let [errorForFiltering, setErrorForFiltering] = useState('');
+    // let { setTotalOrders } = useContext(adminContext);
 
     // let [statusBox, setStatusBox] = useState(false);
     // let [statusOrderId, setStatusOrderId] = useState(null);
@@ -28,6 +30,7 @@ function Orders() {
             })))
             setOrders(allOrders);
             setFilterOrders(allOrders);
+            // setTotalOrders(allOrders);
             // console.log(data);
         }
         GetOrders();
@@ -97,11 +100,6 @@ function Orders() {
                     <h1 className="text-3xl font-bold tracking-tight text-gray-800">
                         🛒 Orders Dashboard
                     </h1>
-                    {/* <img
-                    src="https://i.pravatar.cc/40"
-                    alt="Admin"
-                    className="w-12 h-12 rounded-full border-2 border-blue-500 shadow-md"
-                /> */}
                 </div>
 
                 {/* Stats Summary */}

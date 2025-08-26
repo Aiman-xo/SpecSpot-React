@@ -47,7 +47,12 @@ function Induvidual() {
 
 
     function InduvidualBuy() {
+        const userID = localStorage.getItem("userId")
         setLoading(true);
+        if (!userID) {
+            toast.warning('please login')
+            nav('/login')
+        }
 
         setTimeout(() => {
             setLoading(false);

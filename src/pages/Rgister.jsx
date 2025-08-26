@@ -63,6 +63,7 @@ function Rgister() {
             confirmPass: state.confirmPass,
             role: 'user',
             status: "Active",
+            signupDate: new Date().toLocaleDateString(),
             cart: [],
             wishlist: [],
             orders: []

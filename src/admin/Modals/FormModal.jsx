@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import axios from 'axios';
 import { data } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function reducerFun(prev, action) {
     switch (action.type) {
@@ -99,6 +100,8 @@ function FormModal({ onClose, Edit }) {
                 price: state.price
             })
             setProducts(pre => [...pre, resp.data])
+            onClose(false)
+            toast.success('Product added successfully!');
 
             dispatch({
                 type: 'reset-form',
@@ -307,8 +310,12 @@ function FormModal({ onClose, Edit }) {
                             Add Product
                         </button>
                     </div>
-                    <p>{error}</p>
+
+
                 </form>
+                <div className='flex justify-center mb-6'>
+                    <p className='text-red-500'>{error}</p>
+                </div>
             </div>
 
         </div>
