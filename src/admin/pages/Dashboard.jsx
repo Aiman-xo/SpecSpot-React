@@ -17,14 +17,14 @@ const Dashboard = () => {
 
     useEffect(() => {
         async function GetTotalUser() {
-            const resp = await axios.get('http://localhost:3000/users');
+            const resp = await axios.get('https://specspot-db.onrender.com/users');
             const data = resp.data;
 
             setTotalUser(data)
         }
         GetTotalUser()
         async function GetTotalProducts() {
-            const resp = await axios.get('http://localhost:3000/products');
+            const resp = await axios.get('https://specspot-db.onrender.com/products');
             const data = resp.data;
 
             setTotalProducts(data)

@@ -9,7 +9,7 @@ function AdminContext({ children }) {
 
     useEffect(() => {
         async function GetOrders() {
-            const resp = await axios.get('http://localhost:3000/users');
+            const resp = await axios.get('https://specspot-db.onrender.com/users');
             const data = resp.data;
             // setOrders(data);
 

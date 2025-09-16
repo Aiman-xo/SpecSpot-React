@@ -85,9 +85,9 @@ function FormModal({ onClose, Edit }) {
 
 
         if (state.brand && state.image && state.model && state.type && state.frame && state.stock && state.price !== '') {
-            await axios.get('http://localhost:3000/products');
+            await axios.get('https://specspot-db.onrender.com/products');
 
-            const resp = await axios.post('http://localhost:3000/products', {
+            const resp = await axios.post('https://specspot-db.onrender.com/products', {
 
                 brand: state.brand,
                 image: state.image,

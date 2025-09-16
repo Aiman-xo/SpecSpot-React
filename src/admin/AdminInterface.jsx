@@ -16,7 +16,7 @@ function AdminInterface() {
             <div
                 className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform 
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
-          transition-transform duration-300 md:translate-x-0 md:static md:shadow-none`}
+          transition-transform duration-300 md:translate-x-0 md:shadow-none`}
             >
                 {/* Close button for mobile */}
                 <div className="md:hidden flex justify-end p-4">
@@ -24,7 +24,10 @@ function AdminInterface() {
                         <X size={24} />
                     </button>
                 </div>
+
                 <AdminSidebar Logout={() => console.log("Logout clicked")} />
+
+
             </div>
 
             {/* Overlay (only on mobile when sidebar is open) */}
@@ -48,7 +51,7 @@ function AdminInterface() {
                     <h1 className="text-lg font-bold text-blue-600">Admin Panel</h1>
                 </header>
 
-                <main className="flex-1 p-4 md:p-6 bg-gray-50">
+                <main className="flex-1 p-4 ms-60 md:p-6 bg-gray-50">
                     <Outlet />
                 </main>
             </div>

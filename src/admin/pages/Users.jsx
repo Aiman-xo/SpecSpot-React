@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Lock, Unlock } from "lucide-react";
 import axios from 'axios';
+import Api from '../api/api';
 
 function Users() {
     let [users, setUsers] = useState([]);
@@ -12,13 +13,14 @@ function Users() {
     const [showUnblockModal, setShowunBlockModal] = useState(false);
     let [userId, setUserId] = useState();
     let [state, setState] = useState([]);
+    let { products1, users1 } = Api();
 
     //show number of blocked users
     const BolckedUsers = state.filter((val) => val.status === "Inactive");
     console.log(BolckedUsers.length);
     useEffect(() => {
         async function GetUsers() {
-            const resp = await axios.get('http://localhost:3000/users');
+            const resp = await axios.get(users1);
             const data = await resp.data;
             setState(data)
 
@@ -55,7 +57,7 @@ function Users() {
         setShowBlockModal(false)
         // const Activate = setstatus === "Active" ? "Inactive" : "Active"
 
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
+        await axios.patch(`${users1}/${userId}`, {
             status: "Inactive"
         })
         setFlag(pre => !pre)
@@ -65,7 +67,7 @@ function Users() {
         setShowunBlockModal(false);
         // const Activate = setstatus === "Active" ? "Inactive" : "Active"
 
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
+        await axios.patch(`${users1}/${userId}`, {
             status: "Active"
         })
         setFlag(pre => !pre)

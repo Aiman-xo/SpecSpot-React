@@ -31,7 +31,7 @@ function Cart() {
         })
         setuserDetails({ cart: filtered })
 
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
+        await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
             cart: filtered
         });
         setCartLength(filtered.length)
@@ -43,7 +43,7 @@ function Cart() {
     useEffect(() => {
 
         async function getCart() {
-            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const userDetails = await resp.data;
             setuserDetails(userDetails)
         }
@@ -57,7 +57,7 @@ function Cart() {
 
 
         setuserDetails(pre => ({ ...pre, cart: updatedCart }))
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
+        await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
             cart: updatedCart
         });
     }
@@ -78,13 +78,13 @@ function Cart() {
         console.log(updatedCart)
 
         setuserDetails(pre => ({ ...pre, cart: updatedCart }))
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
+        await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
             cart: updatedCart
         });
     }
 
     async function GetOrders() {
-        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
         const data = resp.data;
     }
 
@@ -292,7 +292,7 @@ function Cart() {
                         </div>
                         <div className="flex justify-between text-sm mb-2">
                             <span>Shipping</span>
-                            <span>$10.00</span>
+                            <span>₹10.00</span>
                         </div>
                         <div className="flex justify-between font-bold text-lg">
                             <span>Total</span>

@@ -15,7 +15,7 @@ function Induvidual() {
 
     useEffect(() => {
         async function GetInduvidualProduct() {
-            const resp = await axios.get(`http://localhost:3000/products/${id}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/products/${id}`);
             const data = await resp.data;
 
             setInduvidual(data);
@@ -29,13 +29,13 @@ function Induvidual() {
             toast.warning('please login')
             nav('/login')
         }
-        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
         const data = await resp.data;
 
         if (data.cart.find((item) => item.id === ID)) {
             toast.error(`${brand} already in the cart`)
         } else {
-            await axios.patch(`http://localhost:3000/users/${userId}`, {
+            await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
                 cart: [...data.cart, Product]
             })
             setCartLength(data.cart.length + 1)

@@ -27,7 +27,7 @@ function Navbar() {
             return
         }
         async function getCartLength() {
-            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const data = resp.data;
             setCartLength(data.cart.length)
             setWishlistLength(data.wishlist.length)
@@ -95,7 +95,7 @@ function Navbar() {
     //search option
     useEffect(() => {
         async function Getproducts() {
-            const resp = await axios.get('http://localhost:3000/products');
+            const resp = await axios.get('https://specspot-db.onrender.com/products');
             const data = resp.data;
             setProducts(data);
         }

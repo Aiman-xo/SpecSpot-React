@@ -47,7 +47,7 @@ function Products() {
 
     useEffect(() => {
         async function ProductList() {
-            const resp = await axios.get('http://localhost:3000/products');
+            const resp = await axios.get('https://specspot-db.onrender.com/products');
             const data = await resp.data;
             setProducts(data);
             setDetails(data)
@@ -58,7 +58,7 @@ function Products() {
                 // navigate('/login')
                 return
             }
-            const wish = await axios.get(`http://localhost:3000/users/${userId}`);
+            const wish = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const wishData = wish.data;
             setWishlist(wishData.wishlist);
 
@@ -105,7 +105,7 @@ function Products() {
             navigate('/login')
             return;
         }
-        const UserData = await axios.get(`http://localhost:3000/users/${userId}`);
+        const UserData = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
         const data = await UserData.data;
 
         if (data.cart.find(item => item.id === ID)) {
@@ -117,7 +117,7 @@ function Products() {
             console.log('user', userId)
             if (userId) {
 
-                await axios.patch(`http://localhost:3000/users/${userId}`, {
+                await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
                     cart: [...data.cart, val]
 
 
@@ -163,7 +163,7 @@ function Products() {
                 return
             }
 
-            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const data = await resp.data;
 
             if (data.wishlist.find((item) => item.id === ID)) {
@@ -172,7 +172,7 @@ function Products() {
             }
             else {
                 const updatedWishlist = [...data.wishlist, val]
-                await axios.patch(`http://localhost:3000/users/${userId}`, {
+                await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
                     wishlist: updatedWishlist
                 });
                 // alert(`${val.brand} is one of your liking`)
@@ -187,14 +187,14 @@ function Products() {
         else {
             const userID = localStorage.getItem("userId");
 
-            const resp = await axios.get(`http://localhost:3000/users/${userID}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userID}`);
             const data = await resp.data;
 
             const newFiltered = data.wishlist.filter((val) => {
                 return val.id !== ID
             })
 
-            await axios.patch(`http://localhost:3000/users/${userID}`, {
+            await axios.patch(`https://specspot-db.onrender.com/users/${userID}`, {
                 wishlist: newFiltered
             })
             setWishlist(newFiltered)

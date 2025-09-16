@@ -49,7 +49,7 @@ function Login() {
     // let { email1, password1 } = useContext(RegisterContext);
     useEffect(() => {
         async function GetCred() {
-            const resp = await axios.get('http://localhost:3000/users');
+            const resp = await axios.get('https://specspot-db.onrender.com/users');
             const data = await resp.data;
             setCred(data);
         }

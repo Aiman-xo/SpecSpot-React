@@ -20,7 +20,7 @@ function AdminSidebar() {
 
 
     return (
-        <aside className="w-64 bg-white shadow-lg h-full flex flex-col">
+        <aside className="w-64 bg-white shadow-lg min-h-screen  flex flex-col">
             {/* Header */}
             <div className="p-6 border-b border-gray-200">
                 <h1 className="text-xl font-bold text-blue-600">Admin Panel</h1>

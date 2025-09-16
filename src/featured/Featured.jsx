@@ -18,7 +18,7 @@ function Featured() {
 
     useEffect(() => {
         async function products() {
-            const resp = await axios.get('http://localhost:3000/products');
+            const resp = await axios.get('https://specspot-db.onrender.com/products');
             const data1 = await resp.data;
             setData(data1);
         }
@@ -39,7 +39,7 @@ function Featured() {
             navigate('/login')
             return
         }
-        const UserData = await axios.get(`http://localhost:3000/users/${userId}`);
+        const UserData = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
         const data = await UserData.data;
 
         if (data.cart.find(item => item.id === ID)) {
@@ -51,7 +51,7 @@ function Featured() {
             console.log('user', userId)
             if (userId) {
 
-                await axios.patch(`http://localhost:3000/users/${userId}`, {
+                await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
                     cart: [...data.cart, val]
 
                 })
@@ -105,7 +105,7 @@ function Featured() {
                 return
             }
 
-            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const data = await resp.data;
 
             if (data.wishlist.find((item) => item.id === ID)) {
@@ -114,7 +114,7 @@ function Featured() {
             }
             else {
                 const updatedWishlist = [...data.wishlist, val]
-                await axios.patch(`http://localhost:3000/users/${userId}`, {
+                await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
                     wishlist: updatedWishlist
                 });
                 // alert(`${val.brand} is one of your liking`)
@@ -129,14 +129,14 @@ function Featured() {
         else {
             const userID = localStorage.getItem("userId");
 
-            const resp = await axios.get(`http://localhost:3000/users/${userID}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userID}`);
             const data = await resp.data;
 
             const newFiltered = data.wishlist.filter((val) => {
                 return val.id !== ID
             })
 
-            await axios.patch(`http://localhost:3000/users/${userID}`, {
+            await axios.patch(`https://specspot-db.onrender.com/users/${userID}`, {
                 wishlist: newFiltered
             })
             setWishlist(newFiltered)
@@ -148,48 +148,7 @@ function Featured() {
 
     }
     return (
-        // <div className='grid grid-cols-2 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mt-4 '>
 
-
-
-
-        //     {
-        //         data.slice(0, 4).map((val) => {
-        //             const isLiked = wishlist1.some(item => item.id === val.id);
-        //             return <div className='card ' key={val.id}>
-        //                 <div className='flex justify-center'>
-        //                     <Link to={`/induvidual/${val.id}`}><img src={val.image} alt="" className='w-40 mt-3' /></Link>
-        //                 </div>
-        //                 <div className='flex justify-start ms-5'>
-        //                     <div >
-        //                         <div className='flex justify-between'><p className='font-bold text-xl '>{val.brand}</p><p className={` text-xs h-5 mt-2 rounded-sm me-1 px-1  font-medium ${val.Productstatus === "Active"
-        //                             ? "bg-green-100 text-green-600"
-        //                             : "bg-red-100 text-red-600"
-        //                             }`}>{val.Productstatus}</p></div>
-
-        //                         <p className='mb-1'>{val.model}</p>
-        //                         <p className='text-green-500 '>{val.price}</p>
-        //                         {val.Productstatus === "Inactive" ? (<button className='bg-red-500 px-3 py-1 rounded text-xs cursor-pointer  cursor-not-allowed opacity-60' disabled>Inactive</button>) : (<button className='bg-yellow-500 px-3 py-1 rounded text-xs cursor-pointer hover:bg-yellow-400' onClick={() => AddtoCart(val, val.id)}>Add to cart</button>)}
-
-        //                         <button
-        //                             onClick={() => wishlist(val, val.id)}
-        //                             className="p-2 rounded-full hover:bg-gray-100 transition ms-13 cursor-pointer"
-        //                         >
-        //                             {isLiked ? (
-        //                                 <HeartSolid className="h-6 w-6 text-red-500" />
-        //                             ) : (
-        //                                 <HeartOutline className="h-6 w-6 text-gray-500" />
-        //                             )}
-        //                         </button>
-
-        //                     </div>
-        //                 </div>
-
-        //             </div>
-        //         })
-        //     }
-
-        // </div>
 
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mt-6">

@@ -67,7 +67,7 @@ function ShippingPage() {
 
     useEffect(() => {
         async function GetCartItems() {
-            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const userObj = resp.data;
             SetUserObject(userObj.cart);
         }
@@ -86,11 +86,11 @@ function ShippingPage() {
             setLoading(true);
             const idNo = Math.floor(Math.random() * 1000);
 
-            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const data = await resp.data;
             const productsToSave = singleProduct ? [singleProduct] : data.cart;
 
-            await axios.patch(`http://localhost:3000/users/${userId}`, {
+            await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
                 orders: [...data.orders, {
                     id: idNo,
                     products: productsToSave,
@@ -128,7 +128,7 @@ function ShippingPage() {
             //     }
             // })
 
-            await axios.patch(`http://localhost:3000/users/${userId}`, {
+            await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
                 cart: []
 
             })

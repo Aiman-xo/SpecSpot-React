@@ -5,6 +5,7 @@ import FormModal from '../Modals/FormModal';
 import { adminContext } from '../../Context-API/adminContext';
 import EditFormModal from '../Modals/EditFormModal';
 import { toast } from 'react-toastify';
+import Api from '../api/api';
 
 
 function ManageProducts() {
@@ -19,9 +20,10 @@ function ManageProducts() {
     let [showDeleteModal, setshowDeleteModal] = useState(false);
     let [deleteId, setDeleteId] = useState();
     let [numTotalProducts, setNumTotalProducts] = useState(0);
+    let { products1, users } = Api();
     useEffect(() => {
         async function GetProducts() {
-            const resp = await axios.get("http://localhost:3000/products");
+            const resp = await axios.get(products1);
             const data = resp.data;
             setProducts(data);
             setNumTotalProducts(data.length);
@@ -51,10 +53,10 @@ function ManageProducts() {
 
 
     async function StatusInactive(ProductId) {
-        await axios.get(`http://localhost:3000/products/${ProductId}`);
+        await axios.get(`${products1}/${ProductId}`);
 
 
-        await axios.patch(`http://localhost:3000/products/${ProductId}`, {
+        await axios.patch(`${products1}/${ProductId}`, {
             Productstatus: "out-of-stock"
         })
         setFlag(pre => !pre)
@@ -62,10 +64,10 @@ function ManageProducts() {
     }
 
     async function StatusActive(ProductId) {
-        await axios.get(`http://localhost:3000/products/${ProductId}`);
+        await axios.get(`${products1}/${ProductId}`);
 
 
-        await axios.patch(`http://localhost:3000/products/${ProductId}`, {
+        await axios.patch(`${products1}/${ProductId}`, {
             Productstatus: "available"
         })
         setFlag(pre => !pre)
@@ -74,10 +76,10 @@ function ManageProducts() {
 
     async function DeleteProduct(ProductId) {
         setshowDeleteModal(false)
-        await axios.get(`http://localhost:3000/products/${ProductId}`);
+        await axios.get(`${products1}/${ProductId}`);
 
 
-        await axios.delete(`http://localhost:3000/products/${ProductId}`)
+        await axios.delete(`${products1}/${ProductId}`)
         setFlag(pre => !pre)
         toast.error('Product Deleted');
 

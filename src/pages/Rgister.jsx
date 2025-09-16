@@ -56,7 +56,7 @@ function Rgister() {
     // let [err, setErr] = useState('');
 
     async function GetUser() {
-        await axios.post('http://localhost:3000/users', {
+        await axios.post('https://specspot-db.onrender.com/users', {
             name: state.name,
             email: state.email,
             password: state.password,

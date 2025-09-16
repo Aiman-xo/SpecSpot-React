@@ -37,7 +37,7 @@ function EditFormModal({ onClose, EditProduct }) {
     }, [EditProduct])
 
     async function PatchEdit() {
-        const resp = await axios.patch(`http://localhost:3000/products/${ProductData.id}`, ProductData);
+        const resp = await axios.patch(`https://specspot-db.onrender.com/products/${ProductData.id}`, ProductData);
 
         setProducts((pre) => pre.map((val) => {
             return val.id === resp.data.id ? resp.data : val

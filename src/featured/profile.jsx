@@ -15,7 +15,7 @@ function Profile() {
         const userId = localStorage.getItem("userId");
 
         async function userProfile() {
-            const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+            const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
             const data = await resp.data;
 
             setUserProfile(data);
@@ -36,7 +36,7 @@ function Profile() {
         setShowModal(false)
         toast.error('order cancelled');
         const userId = localStorage.getItem("userId");
-        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const resp = await axios.get(`https://specspot-db.onrender.com/users/${userId}`);
         const data = resp.data;
 
 
@@ -44,7 +44,7 @@ function Profile() {
             return item.id !== OrderID
         })
 
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
+        await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
             orders: cancelOrder
         })
 

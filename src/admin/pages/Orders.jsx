@@ -3,6 +3,7 @@ import { Eye, Edit, Trash2, Package, Truck, CheckCircle, XCircle, Clock } from "
 import axios from 'axios';
 import OrderDetails from '../Modals/OrderDetails';
 import { adminContext } from '../../Context-API/adminContext';
+import Api from '../api/api';
 
 function Orders() {
     let [orders, setOrders] = useState([]);
@@ -12,13 +13,14 @@ function Orders() {
     let [filterStatus, setFilterStatus] = useState('');
     let [filterOrders1, setFilterOrders] = useState([]);
     let [errorForFiltering, setErrorForFiltering] = useState('');
+    let { users1 } = Api();
     // let { setTotalOrders } = useContext(adminContext);
 
     // let [statusBox, setStatusBox] = useState(false);
     // let [statusOrderId, setStatusOrderId] = useState(null);
     useEffect(() => {
         async function GetOrders() {
-            const resp = await axios.get('http://localhost:3000/users');
+            const resp = await axios.get(users1);
             const data = resp.data;
             // setOrders(data);
 
@@ -43,7 +45,7 @@ function Orders() {
     }
 
     async function ChangeStatus(orderId, userId, value) {
-        const resp = await axios.get(`http://localhost:3000/users/${userId}`);
+        const resp = await axios.get(`${users1}/${userId}`);
         const data = await resp.data;
         console.log(data.orders);
 
@@ -52,7 +54,7 @@ function Orders() {
         })
         // console.log(newStatus);
 
-        await axios.patch(`http://localhost:3000/users/${userId}`, {
+        await axios.patch(`${users1}/${userId}`, {
             orders: newStatus
         });
         setFlag(pre => !pre);
@@ -162,7 +164,7 @@ function Orders() {
                     <select
                         className="px-4 py-2 rounded-lg border-2 border-gray-300 bg-white text-gray-700 text-sm font-medium shadow-sm focus:outline-none focus:border-blue-400 cursor-pointer"
                         onChange={(e) => filterOrders(e.target.value)}
-                        Value={filterStatus}>
+                        value={filterStatus}>
                         <option value="all" >all Status</option>
                         <option value="pending">Pending</option>
                         <option value="shipped">Shipped</option>
