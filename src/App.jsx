@@ -25,7 +25,7 @@ import AdminRoute from "./userRoute/AdminRoute";
 import Context from "./Context-API/context"
 import AdminContext from "./Context-API/adminContext";
 
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 
 function App() {

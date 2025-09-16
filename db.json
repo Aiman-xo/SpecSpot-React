@@ -657,7 +657,7 @@
               "brand": "Oakley",
               "model": "Holbrook",
               "type": "normal",
-              "image": "/src/assets/images/sunglasses (2).jpg",
+              "image": "/src/assets/images/sunglasses(2).jpg",
               "frame_material": "O-Matter",
               "lens_type": "Prizm",
               "quantity": 1,
@@ -727,7 +727,7 @@
     {
       "id": "2",
       "brand": "Oakley",
-      "image": "/src/assets/images/sunglasses (1).jpg",
+      "image": "/src/assets/images/sunglasses(1).jpg",
       "model": "Holbrook",
       "type": "sunglass",
       "frame_material": "O-Matter",
