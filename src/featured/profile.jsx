@@ -226,7 +226,7 @@ function Profile() {
                                     {val.orderStatus !== "cancelled" && (
                                         <div className="flex justify-end px-8 py-6 bg-white">
                                             <button
-                                                className="bg-red-500 px-6 py-2 rounded-lg text-white text-sm font-medium hover:bg-red-600 transition"
+                                                className="bg-red-500 px-6 py-2 rounded-lg text-white text-sm font-medium hover:bg-red-600 transition cursor-pointer"
                                                 onClick={() => showConfirmation(val.id)}
                                             >
                                                 Cancel Order
