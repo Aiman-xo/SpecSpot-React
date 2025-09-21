@@ -22,7 +22,7 @@ function AdminContext({ children }) {
             // setOrders(allOrders);
             // setFilterOrders(allOrders);
             const totalRevenue = allOrders.reduce((acc, val) => {
-                const orderTotal = val.products.reduce((acc2, product) => acc2 + product.price * product.cartQty, 0)
+                const orderTotal = (val.products || []).reduce((acc2, product) => acc2 + product.price * product.cartQty, 0)
                 return acc + orderTotal
             }, 0);
             setTotalRevenue(totalRevenue);

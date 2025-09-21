@@ -40,15 +40,15 @@ function Profile() {
         const data = resp.data;
 
 
-        const cancelOrder = data.orders.filter((item) => {
-            return item.id !== OrderID
+        const updatedOrders = data.orders?.map((item) => {
+            return item?.id === OrderID ? { ...item, orderStatus: "cancelled" } : item
         })
 
         await axios.patch(`https://specspot-db.onrender.com/users/${userId}`, {
-            orders: cancelOrder
+            orders: updatedOrders
         })
 
-        setUserProfile({ ...data, orders: cancelOrder });
+        setUserProfile({ ...data, orders: updatedOrders });
 
 
     }
@@ -120,11 +120,11 @@ function Profile() {
                                 {/* Order Header */}
                                 <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b pb-4 mb-4">
                                     <div>
-                                        <h2 className="text-xl font-bold text-gray-800">#{val.id}</h2>
-                                        <p className="text-gray-500">{val.date}</p>
+                                        <h2 className="text-xl font-bold text-gray-800">#{val?.id}</h2>
+                                        <p className="text-gray-500">{val?.date}</p>
                                     </div>
-                                    <span className={`mt-2 inline-block px-3 py-2 rounded-full text-sm font-medium w-20 text-center ${val.orderStatus === "pending" ? "bg-yellow-100 text-yellow-700" : val.orderStatus === "shipped" ? "bg-blue-100 text-blue-700" :
-                                        val.orderStatus === "delivered" ? "bg-green-100 text-green-700" : val.orderStatus === "cancelled" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"}`}>{val.orderStatus}</span>
+                                    <span className={`mt-2 inline-block px-3 py-2 rounded-full text-sm font-medium w-20 text-center ${val?.orderStatus === "pending" ? "bg-yellow-100 text-yellow-700" : val?.orderStatus === "shipped" ? "bg-blue-100 text-blue-700" :
+                                        val?.orderStatus === "delivered" ? "bg-green-100 text-green-700" : val?.orderStatus === "cancelled" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"}`}>{val?.orderStatus}</span>
                                 </div>
 
                                 {/* Flex Layout: Shipping + Items */}
@@ -132,12 +132,12 @@ function Profile() {
                                     {/* Shipping Info */}
                                     <div className="flex-1 bg-gray-50 rounded-xl p-4">
                                         <h3 className="font-semibold text-gray-700 mb-3">Shipping Address</h3>
-                                        <p className="text-gray-800 font-medium">{val.shipping.fullname}</p>
-                                        <p className="text-gray-600">{val.shipping.mainAddress}</p>
-                                        <p className="text-gray-600">{val.shipping.phone}</p>
-                                        <p className="text-gray-600">{val.shipping.city}</p>
-                                        <p className="text-gray-600">{val.shipping.pin}</p>
-                                        <p className="text-gray-600">{val.shipping.country}</p>
+                                        <p className="text-gray-800 font-medium">{val?.shipping?.fullname}</p>
+                                        <p className="text-gray-600">{val?.shipping?.mainAddress}</p>
+                                        <p className="text-gray-600">{val?.shipping?.phone}</p>
+                                        <p className="text-gray-600">{val?.shipping?.city}</p>
+                                        <p className="text-gray-600">{val?.shipping?.pin}</p>
+                                        <p className="text-gray-600">{val?.shipping?.country}</p>
                                     </div>
 
                                     {/* Ordered Items */}
@@ -145,18 +145,18 @@ function Profile() {
                                         <h3 className="font-semibold text-gray-700 mb-3">Items</h3>
                                         <div className="space-y-4">
                                             {/* Item 1 */}
-                                            {val?.products?.map((val) => {
-                                                return <div className="flex items-center gap-4  pb-4" key={val.id}>
+                                            {val?.products?.map((item) => {
+                                                return <div className="flex items-center gap-4  pb-4" key={item?.id}>
                                                     <img
-                                                        src={val.image}
+                                                        src={item?.image}
                                                         alt="product"
                                                         className="w-30 h-20 object-cover rounded-lg"
                                                     />
                                                     <div className="flex-1">
-                                                        <p className="font-medium text-gray-800">{val.brand}</p>
-                                                        <p className="text-gray-600 text-sm">{val.cartQty}</p>
+                                                        <p className="font-medium text-gray-800">{item?.brand}</p>
+                                                        <p className="text-gray-600 text-sm">{item?.cartQty}</p>
                                                     </div>
-                                                    <p className="font-semibold text-gray-900">{val.price}</p>
+                                                    <p className="font-semibold text-gray-900">{item.price}</p>
                                                 </div>
                                             })}
 
@@ -175,7 +175,7 @@ function Profile() {
                                 </div>
 
                                 <div className='flex justify-center'>
-                                    <button className='bg-red-500 px-5 py-1 rounded text-white hover:bg-red-600 cursor-pointer mt-10' onClick={() => showConfirmation(val.id)}>Cancel</button>
+                                    <button className='bg-red-500 px-5 py-1 rounded text-white hover:bg-red-600 cursor-pointer mt-10' onClick={() => showConfirmation(val?.id)}>Cancel</button>
                                 </div>
                             </div>
 
