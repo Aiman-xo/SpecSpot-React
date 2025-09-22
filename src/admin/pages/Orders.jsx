@@ -177,7 +177,7 @@ function Orders() {
                 {/* Orders List */}
 
                 {
-                    filterOrders1.map((val) => {
+                    filterOrders1.sort((a, b) => new Date(b.date) - new Date(a.date)).map((val) => {
                         return <div className="grid gap-6 mb-7" key={val.id}>
                             {/* Order Card 1 */}
                             <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition flex justify-between items-center">
